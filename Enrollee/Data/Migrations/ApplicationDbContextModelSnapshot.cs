@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Enrollee.Data.Migrations
 {
-    [DbContext(typeof(ErolleeDbContext))]
+    [DbContext(typeof(EnrolleeDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

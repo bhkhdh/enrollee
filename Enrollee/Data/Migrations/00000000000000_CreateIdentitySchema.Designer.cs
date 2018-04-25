@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Enrollee.Data.Migrations
 {
-    [DbContext(typeof(ErolleeDbContext))]
+    [DbContext(typeof(EnrolleeDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {

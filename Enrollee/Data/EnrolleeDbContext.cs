@@ -8,9 +8,9 @@ using Enrollee.Models;
 
 namespace Enrollee.Data
 {
-    public class ErolleeDbContext : IdentityDbContext<ApplicationUser>
+    public class EnrolleeDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ErolleeDbContext(DbContextOptions<ErolleeDbContext> options)
+        public EnrolleeDbContext(DbContextOptions<EnrolleeDbContext> options)
             : base(options)
         {
         }
