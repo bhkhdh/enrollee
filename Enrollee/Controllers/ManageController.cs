@@ -61,7 +61,8 @@ namespace Enrollee.Controllers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
-                StatusMessage = StatusMessage
+                StatusMessage = StatusMessage,
+                GivenName = user.GivenName
             };
 
             return View(model);

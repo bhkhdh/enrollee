@@ -11,5 +11,10 @@ namespace Enrollee.Models.AccountViewModels
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+
+        [Required]
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
     }
 }

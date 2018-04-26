@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <UserSecretsId>aspnet-Enrollee-AE3D64AB-030D-4BB0-A9B5-8A46866A7775</UserSecretsId>
+    <UserSecretsId>aspnet-Enrollee</UserSecretsId>
   </PropertyGroup>
 
 

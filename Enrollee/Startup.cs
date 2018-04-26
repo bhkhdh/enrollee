@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Enrollee.Data;
 using Enrollee.Models;
 using Enrollee.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace Enrollee
 {
@@ -33,10 +35,26 @@ namespace Enrollee
                 .AddEntityFrameworkStores<EnrolleeDbContext>()
                 .AddDefaultTokenProviders();
 
+            //Google authentification
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            });
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
+            //Override User claims for accessing custom properties
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, MyUserClaimsPrincipalFactory>();
+
             services.AddMvc();
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +70,10 @@ namespace Enrollee
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+
+            var options = new RewriteOptions().AddRedirectToHttps();
+            app.UseRewriter(options);
 
             app.UseStaticFiles();
 

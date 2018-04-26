@@ -21,5 +21,8 @@ namespace Enrollee.Models.ManageViewModels
         public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }
+
+
+        public string GivenName { get; set; }
     }
 }
