@@ -9,8 +9,5 @@
     Типо приветственная страница.
 
     <a asp-controller="Comments"> check out comment table </a>
-    <h3> Comment section</h3>
-
-    @await Html.PartialAsync("CreateCommentPartial")
-    @await Component.InvokeAsync("CommentList")
+    @await Component.InvokeAsync("CommentSection")
 </div>

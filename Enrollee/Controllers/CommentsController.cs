@@ -28,11 +28,9 @@ namespace Enrollee.Controllers
             return View(await _context.Comments.ToListAsync());
         }
 
-        public async Task<IActionResult> GetComments(int? page)
+        public IActionResult GetComments(int? page)
         {
-            var pageSize = 10;
-            var comments = _context.Comments.Select(c => c);
-            return Json( await PaginatedList<Comment>.CreateAsync(comments.AsNoTracking(), page ?? 1, pageSize));
+            return ViewComponent("CommentList", new { page } );
         }
 
         // GET: Comments/Details/5
@@ -66,7 +64,6 @@ namespace Enrollee.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Text")] Comment comment)
         {
-
             var user = await _userManager.GetUserAsync(HttpContext.User);
             Guid UserID = new Guid(user.Id);
 
@@ -79,7 +76,7 @@ namespace Enrollee.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(comment);
+            return View();
         }
 
         [HttpPost]

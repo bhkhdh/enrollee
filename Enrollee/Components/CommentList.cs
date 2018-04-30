@@ -20,12 +20,15 @@ namespace Enrollee.Components
             _userManager = userManager;
         }
 
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync(int? page)
         {
+            int pageSize = 5;
             var items = from c in _context.Comments
                         orderby c.DateTime descending
                         select c;
-            return View("CommentsPartial",items);
+
+            var data = await PaginatedList<Comment>.CreateAsync(items, page ?? 1, pageSize);
+            return View("CommentListComponentView", data);
         }
     }
 }

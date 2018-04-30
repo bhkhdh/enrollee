@@ -1,0 +1,44 @@
+﻿@model PaginatedList<Enrollee.Models.Comment>
+
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<div class="row">
+    <ul class="list-inline">
+        <li>
+            <p style="margin:10px;">@Model.PageIndex / @Model.TotalPages pages</p>
+        </li>
+        <li>
+            <a data-page="@(Model.PageIndex - 1)"
+               class="SwitchPageBtn btn btn-default @prevDisabled">
+                Previous
+            </a>
+        </li>
+        <li>
+            <a data-page="@(Model.PageIndex + 1)"
+               class="SwitchPageBtn btn btn-default @nextDisabled">
+                Next
+            </a>
+        </li>
+    </ul>
+
+    <ul>
+        @foreach (var item in Model)
+        {
+
+            var user = await @UserManager.FindByIdAsync(item.UserId.ToString());
+            if (user == null) continue;
+            <li>
+                <div>
+                    <b>@user.GivenName</b>
+                    <p>@item.Text</p>
+                    <i>@item.DateTime</i>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
