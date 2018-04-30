@@ -28,6 +28,13 @@ namespace Enrollee.Controllers
             return View(await _context.Comments.ToListAsync());
         }
 
+        public async Task<IActionResult> GetComments(int? page)
+        {
+            var pageSize = 10;
+            var comments = _context.Comments.Select(c => c);
+            return Json( await PaginatedList<Comment>.CreateAsync(comments.AsNoTracking(), page ?? 1, pageSize));
+        }
+
         // GET: Comments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -67,7 +74,7 @@ namespace Enrollee.Controllers
             if (ModelState.IsValid)
             {
                 comment.UserId = UserID;
-                comment.DateTime = DateTime.Now;
+                comment.DateTime = DateTime.Now.ToUniversalTime();
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

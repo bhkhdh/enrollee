@@ -1,12 +1,16 @@
-﻿@{
+﻿
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 
 <div class="jumbotron" style="margin-top:10px;">
     Типо приветственная страница.
-    
+
     <a asp-controller="Comments"> check out comment table </a>
     <h3> Comment section</h3>
-    @await Html.PartialAsync("CommentPartial")
+
+    @await Html.PartialAsync("CreateCommentPartial")
+    @await Component.InvokeAsync("CommentList")
 </div>
