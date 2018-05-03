@@ -5,9 +5,23 @@
 }
 
 
-<div class="jumbotron" style="margin-top:10px;">
-    Типо приветственная страница.
-
-    <a asp-controller="Comments"> check out comment table </a>
-    @await Component.InvokeAsync("CommentSection")
+<div class="row welcome-text">
+    <h3>Welcome text</h3>
+    <p>a fiew lines of text</p>
+    <p>about something</p>
 </div>
+
+<div class="row">
+    <div style="margin:auto; display:block; width:320px; height:240px;">
+        <video width="320" height="240" controls>
+            <source src="movie.mp4" type="video/mp4">
+            <source src="movie.ogg" type="video/ogg">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+
+<div class="row">
+
+</div>
+
