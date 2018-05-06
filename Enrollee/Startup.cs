@@ -13,6 +13,9 @@ using Enrollee.Models;
 using Enrollee.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
+using Npgsql;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Enrollee
 {
@@ -28,8 +31,21 @@ namespace Enrollee
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<EnrolleeDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            var connstr = new NpgsqlConnectionStringBuilder(Configuration["Database:ConnectionString"]) {
+                Password = Configuration["Database:Password"],
+                SslMode = SslMode.Require,
+                TrustServerCertificate = true,
+                UseSslStream = true,
+            };
+
+            services.AddDbContext<EnrolleeDbContext>(options => {
+                var conn = new NpgsqlConnection(connstr.ConnectionString);
+                conn.ProvideClientCertificatesCallback += certs => {
+                    certs.Add(new X509Certificate2(Configuration["Database:CertificateFile"]));
+                };
+
+                options.UseNpgsql(conn);
+            });
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options => {
                     options.Password.RequireDigit = false;

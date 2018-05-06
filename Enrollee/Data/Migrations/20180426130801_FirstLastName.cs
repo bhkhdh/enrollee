@@ -35,14 +35,14 @@ namespace Enrollee.Data.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                filter: "\"NormalizedUserName\" IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
                 unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                filter: "\"NormalizedName\" IS NOT NULL");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserTokens_AspNetUsers_UserId",

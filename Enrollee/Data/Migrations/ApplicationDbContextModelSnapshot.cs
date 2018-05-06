@@ -68,7 +68,7 @@ namespace Enrollee.Data.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasFilter("\"NormalizedUserName\" IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -109,7 +109,7 @@ namespace Enrollee.Data.Migrations
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasFilter("\"NormalizedName\" IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
                 });
