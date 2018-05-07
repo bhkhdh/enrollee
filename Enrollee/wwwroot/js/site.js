@@ -17,7 +17,6 @@ var getComments = function () {
 
 $(document).ready(function () {
     $('#SubmitComment').click(function () {
-        alert('its alive');
         var text = $("#Text").val();
         $.ajax({
             url: '/Comments/CreateFromPartial',
