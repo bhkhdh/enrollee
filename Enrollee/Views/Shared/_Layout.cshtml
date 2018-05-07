@@ -7,12 +7,18 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/all.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css"
+              asp-fallback-href="~/lib/font-awesome/all.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
+              crossorigin="anonymous">
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
@@ -36,32 +42,28 @@
             <div id="navbar-collapse" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="brand-text"><h3>Абитуриент</h3></li>
+                    <li><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                    <li><a asp-controller="Home" asp-action="About">О Нас</a></li>
+                    <li><a asp-controller="Home" asp-action="Contact">Контакты</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
 
         </div>
     </nav>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <div class="col-md-6 contacts">
-                <h4>Our contacts</h4>
-                <address>
-                    Адрес или чето типо того
-                </address>
-
-                <address>
-                    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-                </address>
-            </div>
-            <div class="col-md-6">
-                <p>&copy; 2018 - Enrollee</p>
-            </div>
-            
-        </footer>
     </div>
+
+    <div class="container-fluid raw-body">
+        @RenderSection("RawBody")
+    </div>
+
+    <footer>
+        <p>&copy; 2018 - Enrollee</p>
+    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
