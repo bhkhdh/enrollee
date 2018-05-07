@@ -1,0 +1,8 @@
+﻿
+<h3>Comment Section </h3>
+
+@await Component.InvokeAsync("CommentCreate")
+
+<div id="CommentListSegment" >
+    @await Component.InvokeAsync("CommentList")
+</div>

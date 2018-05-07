@@ -1,6 +1,6 @@
-@model TwoFactorAuthenticationViewModel
+﻿@model TwoFactorAuthenticationViewModel
 @{
-    ViewData["Title"] = "Two-factor authentication";
+    ViewData["Title"] = "Двухфакторноя аутентификация";
     ViewData.AddActivePage(ManageNavPages.TwoFactorAuthentication);
 }
 
@@ -10,38 +10,38 @@
     if (Model.RecoveryCodesLeft == 0)
     {
         <div class="alert alert-danger">
-            <strong>You have no recovery codes left.</strong>
-            <p>You must <a asp-action="GenerateRecoveryCodes">generate a new set of recovery codes</a> before you can log in with a recovery code.</p>
+            <strong>У вас не осталось кодов восстановления.</strong>
+            <p>Вы должны <a asp-action="GenerateRecoveryCodes">сгенерировать новый список кодов восстановления</a> прежде чем вы можете использовать их для входа.</p>
         </div>
     }
     else if (Model.RecoveryCodesLeft == 1)
     {
         <div class="alert alert-danger">
-            <strong>You have 1 recovery code left.</strong>
-            <p>You can <a asp-action="GenerateRecoveryCodes">generate a new set of recovery codes</a>.</p>
+            <strong>У вас остался один код восстановления</strong>
+            <p>Рекоммендуем вам <a asp-action="GenerateRecoveryCodes">сгенерировать новый список кодов восстановления</a>.</p>
         </div>
     }
     else if (Model.RecoveryCodesLeft <= 3)
     {
         <div class="alert alert-warning">
-            <strong>You have @Model.RecoveryCodesLeft recovery codes left.</strong>
-            <p>You should <a asp-action="GenerateRecoveryCodes">generate a new set of recovery codes</a>.</p>
+            <strong>У вас осталось @Model.RecoveryCodesLeft кодов восстановления.</strong>
+            <p>Рекоммендуем вам <a asp-action="GenerateRecoveryCodes">сгенерировать новый список кодов восстановления</a>.</p>
         </div>
     }
 
-    <a asp-action="Disable2faWarning" class="btn btn-default">Disable 2FA</a>
-    <a asp-action="GenerateRecoveryCodesWarning" class="btn btn-default">Reset recovery codes</a>
+    <a asp-action="Disable2faWarning" class="btn btn-default">Отключить 2ФА</a>
+    <a asp-action="GenerateRecoveryCodesWarning" class="btn btn-default">Сброс кодов восстановления</a>
 }
 
-<h5>Authenticator app</h5>
-@if (!Model.HasAuthenticator)
+    <h5>Приложение аутентификации</h5>
+@if (!Model.HasAuthenticator || !Model.Is2faEnabled)
 {
-    <a asp-action="EnableAuthenticator" class="btn btn-default">Add authenticator app</a>
+    <a asp-action="EnableAuthenticator" class="btn btn-default">Добавить приложение аутентификации</a>
 }
 else
 {
-    <a asp-action="EnableAuthenticator" class="btn btn-default">Configure authenticator app</a>
-    <a asp-action="ResetAuthenticatorWarning" class="btn btn-default">Reset authenticator key</a>
+    <a asp-action="EnableAuthenticator" class="btn btn-default">Настроить приложение аутентификации</a>
+    <a asp-action="ResetAuthenticatorWarning" class="btn btn-default">Сбросить ключ аутентификации</a>
 }
 
 @section Scripts {

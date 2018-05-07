@@ -1,0 +1,57 @@
+﻿@model Enrollee.Models.Comment
+@using System.Linq
+@inject SignInManager<ApplicationUser> SignInManager
+
+
+<div class="row">
+    <div class="col-md-4">
+        @if (User.Identity.IsAuthenticated)
+        {
+
+        <div class="form-group">
+            <input asp-for="Text" type="text" class="form-control" />
+            <span asp-validation-for="Text" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input id="SubmitComment" type="submit" value="Create" class="btn btn-default " />
+        </div>
+        }
+        else
+        {
+        <ul>
+            <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+            <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+
+            @*Need to do something with ReturnUrl to make it work*@
+            @*@{
+                    var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                    if (loginProviders.Count == 0)
+                    {
+                        <li>
+                            <p>
+                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                for details on setting up this ASP.NET application to support logging in via external services.
+                            </p>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                        <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                            <div>
+                                <p>
+                                    @foreach (var provider in loginProviders)
+                                    {
+                                        <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.Name</button>
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                        </li>
+                    }
+                }*@
+        </ul>
+        }
+    </div>
+</div>
+

@@ -11,9 +11,10 @@ using System;
 namespace Enrollee.Data.Migrations
 {
     [DbContext(typeof(EnrolleeDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180430202120_TextRequired")]
+    partial class TextRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -11,9 +11,10 @@ using System;
 namespace Enrollee.Data.Migrations
 {
     [DbContext(typeof(EnrolleeDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180428174636_CommentExpansion")]
+    partial class CommentExpansion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,8 +81,7 @@ namespace Enrollee.Data.Migrations
 
                     b.Property<DateTime>("DateTime");
 
-                    b.Property<string>("Text")
-                        .IsRequired();
+                    b.Property<string>("Text");
 
                     b.Property<Guid>("UserId");
 

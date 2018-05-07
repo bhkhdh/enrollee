@@ -1,106 +1,34 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+
+@{
+    ViewData["Title"] = "Главная Страница";
 }
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Package Management" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Bring in libraries from NuGet and npm, and automate tasks using Grunt or Gulp.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner4.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+
+
+<div class="row welcome-text">
+    <h2>
+        Добро пожаловать на сайт абитуриента</h3>
+        <p>Предлагаем ознакомиться с нашим ВУЗом и пройти интересный квест ;)</p>
 </div>
 
 <div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
+    <div class="video-wrapper">
+        <video width="100%" height="100%" preload="auto" controls>
+            <source src="~/resources/video/video.mp4" type="video/mp4"> Your browser does not support the video tag.
+        </video>
     </div>
 </div>
+
+<div class="game">
+    <svg version="1.1" id="play-dashad-border" class="centered-element-wrapper" viewBox="0 0 550 500" xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink">
+
+        <path class="path" fill="none" stroke="#000000" stroke-width="1.5" stroke-miterlimit="10" d="M322,8c-5.207617361100006,-3.2315973480999958,-17.935140549899984,-5.883164679099998,-24,-5s-20.46748207530004,17.255405843099993,-28,22s-33.08789351070004,16.891267302100005,-45,20s-41.237016044899974,4.801731034400007,-55,4s-26.346368974200004,-6.799908350199999,-35,-5s-18.433690504900028,10.448808197299996,-25,13s-8.894152577900002,3.405263259600005,-12,4s-13.554130273999988,-0.6958752615000066,-18,0s-20.153214313499973,7.046824423900006,-26,11s-19.2267722231,19.333266889300006,-24,27s-9.084367788999998,20.213131148299993,-12,27s-8.044237079000027,17.801210489400006,-10,24s-5.950970966199975,21.596615898500005,-6,29s3.143527706700013,22.90489140059998,6,30s7.430001201399989,13.53960694829999,10,18s10.86573975570002,14.28043238539999,12,20s-1.6108549599999833,14.990153082400013,-2,20s-1.4962818880999862,12.771678313200027,-1,17s4.416060646099993,18.86327424159998,9,23s11.942474167,5.387863493899999,16,7s15.228590935199975,4.698662228999979,20,7s15.552940358099988,9.026819845299997,20,13s17.513812189900023,19.764778680999996,20,28s0.7230757181999934,15.883168521599998,2,21s8.546619120199978,24.00211292450001,15,29s25.30638555439998,3.5455395843999895,33,7s15.337207579999983,7.740134780599988,19,12s4.794630722299985,9.3169334058,7,12s13.296694287499975,10.051879348700027,18,13s24.06611811480002,13.938870586100052,33,16s27.914227699499975,1.7352929733999645,37,0s22.889794857499965,-7.358917354399978,30,-11s17.038984727900015,-11.595400621900012,23,-15s21.137803629699988,-12.26842030649999,29,-14s27.017944217700006,6.881667189799998,30,0s0,-13,0,-13s0,-17,0,-17s0,-14,0,-14s-0.2280136864000042,-9.00867759030001,0,-12s3.9552842181000187,-20.726667089399996,7,-27s12.757618755200042,-19.573356079999996,19,-24s25.30197246429998,-8.313489701200012,34,-10s17.40881887559999,-1.462569144999975,23,-3s16.363526959200044,-5.6641166474000215,21,-9s10.992157686200017,-10.84483639130002,14,-15s9.961500402999945,-17.609028290399976,12,-24s3.538775169599944,-16.428889549100006,4,-22s-0.08195873249997021,-14.250707129899979,0,-19s1.9777245110000194,-18.821889060499984,1,-25s-5.201101602100039,-18.839489273100014,-9,-24s-7.312875478399974,-7.702313814900009,-10,-10s-13.832584380999947,-8.552878438600004,-18,-12s-11.183988379799985,-9.929363863600003,-14,-14s-7.3261439747999475,-16.298183972900006,-9,-22s-3.4186816410000347,-14.934225728900003,-4,-20s1.9600000000000364,-21.28,0,-28s-5.456704166800023,-12.321461390099998,-8,-16s-13.708845285500047,-14.150820634599995,-19,-18s-19.556288127600055,-12.449627928300004,-27,-14s-17.25739704809996,0.29156703729999833,-23,0s-20.290304858399963,-1.9488144278000021,-27,-3s-19.027759419099993,-2.773490973799994,-25,-5s-3.3453166222000164,-1.0589872668000027,-9,-4" />
+    </svg>
+    <!--
+        <div class="centered-element-wrapper">
+            <img id="play-button" src="~/resources/img/play-button.png">
+        </div>
+        -->
+    </div>
