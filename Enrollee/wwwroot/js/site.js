@@ -37,7 +37,7 @@ $(document).ready(function () {
 $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
 
 $(document).ready(function () {
-    $("#game-fullscreen").click(function () {
+    $("#fullscreen-button > a").click(function () {
         if (document.fullscreenElement
         || document.webkitFullscreenElement
         || document.mozFullScreenElement
