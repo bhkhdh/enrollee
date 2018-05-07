@@ -21,7 +21,7 @@
 </div>
 
 @section RawBody {
-    <div class="game">
+    <div class="game" id="game-body">
         <svg version="1.1" id="play-dashad-border" class="centered-element-wrapper" viewBox="0 0 550 500" xmlns="http://www.w3.org/2000/svg"
              xmlns:xlink="http://www.w3.org/1999/xlink">
 
@@ -29,6 +29,12 @@
         </svg>
         <div class="centered-element-wrapper">
             <img id="play-button" src="~/resources/img/play-button.png">
+        </div>
+
+        <div class="fullscreen-btn">
+            <a href="javascript:void(0)" id="game-fullscreen">
+                <i class="fas fa-window-maximize"></i>
+            </a>
         </div>
     </div>
 }

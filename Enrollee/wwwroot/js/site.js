@@ -35,3 +35,38 @@ $(document).ready(function () {
 });
 
 $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
+
+$(document).ready(function () {
+    $("#game-fullscreen").click(function () {
+        if (document.fullscreenElement
+        || document.webkitFullscreenElement
+        || document.mozFullScreenElement
+        || document.msFullscreenElement) {
+
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+
+        } else {
+
+            var obj = $("#game-body")[0];
+
+            if (obj.requestFullscreen) {
+                obj.requestFullscreen();
+            } else if (obj.mozRequestFullScreen) {
+                obj.mozRequestFullScreen();
+            } else if (obj.webkitRequestFullscreen) {
+                obj.webkitRequestFullscreen();
+            } else if (obj.msRequestFullscreen) {
+                obj.msRequestFullscreen();
+            }
+
+        }
+    });
+});
