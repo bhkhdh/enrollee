@@ -36,6 +36,9 @@
             <div id="navbar-collapse" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="brand-text"><h3>Абитуриент</h3></li>
+                    <li><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                    <li><a asp-controller="Home" asp-action="About">О Нас</a></li>
+                    <li><a asp-controller="Home" asp-action="Contact">Контакты</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
@@ -46,20 +49,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <div class="col-md-6 contacts">
-                <h4>Our contacts</h4>
-                <address>
-                    Адрес или чето типо того
-                </address>
-
-                <address>
-                    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-                </address>
-            </div>
-            <div class="col-md-6">
-                <p>&copy; 2018 - Enrollee</p>
-            </div>
-            
+            <p>&copy; 2018 - Enrollee</p>
         </footer>
     </div>
 

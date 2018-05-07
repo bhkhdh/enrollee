@@ -38,6 +38,10 @@ svg .path {
     padding-right: 15px;
 }
 
+.video-body {
+    margin-bottom: 15px;
+}
+
 .video-wrapper {
     margin: auto;
     display: block;
@@ -66,6 +70,11 @@ svg .path {
     width: 100%;
     height: 100vh;
     position: relative;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
 }
 
 /* Carousel */
@@ -105,41 +114,13 @@ svg .path {
     height: 80px;
 }
 
-.navbar-nav .brand-text {
-    padding-top: 10px;
+.navbar-nav {
+    padding-top: 15px;
 }
 
 .navbar-nav h3 {
     margin: 10px;
 }
-
-/*
-.navbar {
-    height: 80px;
-}
-
-    .navbar .navbar-brand img {
-        height: 80px;
-    }
-
-    .navbar .navbar-brand {
-        padding: unset;
-    }
-
-    .navbar .navbar-right {
-        padding-top: 5px;
-    }
-
-.nav .navbar-nav {
-    height: 100%;
-    color: white;
-}
-
-    .nav .navbar-nav li {
-        height: 80px;
-        padding-left: 15px;
-    }
-*/
 
 .welcome-text {
     text-align: center;
