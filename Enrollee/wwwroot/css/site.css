@@ -38,10 +38,6 @@ svg .path {
     padding-right: 15px;
 }
 
-.video-body {
-    margin-bottom: 15px;
-}
-
 .video-wrapper {
     margin: auto;
     display: block;
@@ -70,6 +66,10 @@ svg .path {
     width: 100%;
     height: 100vh;
     position: relative;
+}
+
+.raw-body {
+    margin-bottom: 20px;
 }
 
 footer {
