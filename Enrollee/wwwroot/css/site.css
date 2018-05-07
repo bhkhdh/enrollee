@@ -1,4 +1,4 @@
-﻿body {
+body {
     padding-top: 70px;
     padding-bottom: 20px;
     margin: 0;
@@ -7,6 +7,9 @@
 svg#play-dashad-border {
     width: 50%;
     height: 50%;
+    z-index: 2;
+    position:absolute;
+    margin-top: 20px;
 }
 
 svg .path {
@@ -21,7 +24,6 @@ svg .path {
     from {
         stroke-dashoffset: 0;
     }
-
     to {
         stroke-dashoffset: 30;
     }
@@ -43,12 +45,10 @@ svg .path {
     height: 100%;
     max-width: 720px;
     height: 540px;
-
-    margin-bottom: 20px;
 }
 
 .centered-element-wrapper {
-    position: relative;
+    position: absolute;
     left: 50%;
     top: 50%;
     width: 150px;
@@ -56,15 +56,16 @@ svg .path {
     transform: translate(-50%, -50%);
 }
 
-    .centered-element-wrapper img {
-        width: 100%;
-        height: 100%;
-    }
+.centered-element-wrapper img {
+    width: 100%;
+    height: 100%;
+}
 
 .game {
-    background: #64AB00;
+    background: #80db00;
     width: 100%;
     height: 100vh;
+    position: relative;
 }
 
 /* Carousel */
@@ -100,9 +101,9 @@ svg .path {
     padding: 0;
 }
 
-    .navbar-brand .brand-logo {
-        height: 80px;
-    }
+.navbar-brand .brand-logo {
+    height: 80px;
+}
 
 .navbar-nav .brand-text {
     padding-top: 10px;
