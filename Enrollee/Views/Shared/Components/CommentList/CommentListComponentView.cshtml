@@ -10,18 +10,18 @@
 <div class="row">
     <ul class="list-inline">
         <li>
-            <p style="margin:10px;">@Model.PageIndex / @Model.TotalPages pages</p>
+            <p style="margin:10px;">@Model.PageIndex / @Model.TotalPages страниц</p>
         </li>
         <li>
             <a data-page="@(Model.PageIndex - 1)"
                class="SwitchPageBtn btn btn-default @prevDisabled">
-                Previous
+                Назад
             </a>
         </li>
         <li>
             <a data-page="@(Model.PageIndex + 1)"
                class="SwitchPageBtn btn btn-default @nextDisabled">
-                Next
+                Вперёд
             </a>
         </li>
     </ul>
