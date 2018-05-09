@@ -4,31 +4,6 @@ body {
     margin: 0;
 }
 
-svg#play-dashad-border {
-    width: 50%;
-    height: 50%;
-    z-index: 2;
-    position:absolute;
-    margin-top: 20px;
-}
-
-svg .path {
-    width: 100%;
-    height: 100%;
-    stroke-dasharray: 20 10;
-    stroke-linejoin: round;
-    animation: dash 1s forwards linear infinite;
-}
-
-@keyframes dash {
-    from {
-        stroke-dashoffset: 0;
-    }
-    to {
-        stroke-dashoffset: 30;
-    }
-}
-
 /* Wrapping element */
 
 /* Set some basic padding to keep content from hitting the edges */
@@ -60,44 +35,6 @@ svg .path {
     width: 100%;
     height: 100%;
 }
-
-.game {
-    background: #40A000;
-    width: 100%;
-    height: 100vh;
-    position: relative;
-}
-
-    .game #fullscreen-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-
-        .game #fullscreen-button > a {
-            color: #333;
-        }
-
-        .game #fullscreen-button > a:hover {
-            color: #8F3;
-        }
-
-    .game .main-screen-item {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        height: 100%;
-        transform: translate(-50%, -50%);
-    }
-
-    .game #play-button {
-        height: 20%;
-    }
-
-    .game #play-button:hover {
-        transform: translate(-50%, -50%) scale(1.2, 1.2);
-    }
-
 
 .raw-body {
     margin-bottom: 20px;
@@ -160,3 +97,29 @@ footer {
 .contacts {
     padding-left: 50px;
 }
+
+/* Utility classes */
+
+div.has-bg {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+    div.has-bg > img {
+        display: none;
+    }
+
+.fullscreen-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+    .fullscreen-btn > a {
+        color: #333;
+    }
+
+    .fullscreen-btn > a:hover {
+        color: #8F3;
+    }

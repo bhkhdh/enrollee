@@ -1,42 +1,31 @@
-﻿// Write your JavaScript code.
-var getComments = function () {
-    var page = $(this).attr('data-page');
-    $.ajax({
-        url: "/Comments/GetComments",
-        type: "GET",
-        data: { page: page },
-        success: function (data) {
-            $("#CommentListSegment").html(data);
-        },
-        error: function () {
-            alert('Something happened!');
+﻿(function () {
+
+    var util = window.$U = {};
+
+    util.setBgImage = function (target, url) {
+        var _obj = $(target);
+
+        if (url) {
+            url = "url('" + url.replace("'", "\\'") + "')";
+            _obj.css('background-image', url);
+        } else {
+            _obj.css('background-image', 'none');
         }
-    });
-};
+    }
 
-
-$(document).ready(function () {
-    $('#SubmitComment').click(function () {
-        var text = $("#Text").val();
-        $.ajax({
-            url: '/Comments/CreateFromPartial',
-            data: { data: text },
-            type: 'POST',
-            success: function (obj) {
-                $("#Text").val("");
-                getComments();
-            },
-            error: function (obj) {
-                alert('Something happened');
-            }
-        });
-    });
-});
-
-$('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
+}).call(this);
 
 $(document).ready(function () {
-    $("#fullscreen-button > a").click(function () {
+    $("div.has-bg img").each(function () {
+        var _obj = $(this);
+
+        $U.setBgImage(_obj.parent(), _obj.attr('src'));
+        _obj.remove();
+    });
+
+    var button = $(".fullscreen-btn > a");
+    button.attr('href', 'javascript:void(0)');
+    button.click(function () {
         if (document.fullscreenElement
         || document.webkitFullscreenElement
         || document.mozFullScreenElement
@@ -54,7 +43,8 @@ $(document).ready(function () {
 
         } else {
 
-            var obj = $("#game-body")[0];
+            var sel = $(this).attr('data-target');
+            var obj = document.getElementById(sel);
 
             if (obj.requestFullscreen) {
                 obj.requestFullscreen();

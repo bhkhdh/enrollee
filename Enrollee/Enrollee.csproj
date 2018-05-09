@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-Enrollee</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\images\game\dialog\desktop.ini" />
+    <Content Remove="wwwroot\images\game\scene\desktop.ini" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
@@ -19,9 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\images\game\dialog\" />
+    <Folder Include="wwwroot\images\game\scene\" />
     <Folder Include="wwwroot\lib\font-awesome\" />
     <Folder Include="wwwroot\lib\webfonts\" />
-    <Folder Include="wwwroot\resources\video\" />
   </ItemGroup>
 
 </Project>
