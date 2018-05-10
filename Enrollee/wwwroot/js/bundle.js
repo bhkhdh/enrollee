@@ -34,6 +34,8 @@ $(document).ready(function () {
 $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
 (function () {
 
+    var BLANK_IMG, UI_TEXT, UI_NAME, UI_IMAGE, UI_SCENE, UI_FADE, UI_DIALOG, UI_NEXTBTN;
+
     var $game = window.$game = {};
 
     var dialog = $game.dialog = {
@@ -42,6 +44,8 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
 
         _index: 0,
         _stage: null,
+
+        _busy: false,
     };
 
     dialog.setStage = function (name, data) {
@@ -63,47 +67,79 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
     }
 
     dialog.advance = function () {
-        if (!this._stage) return;
+        if (!this._stage || this._busy) return;
 
-        var _text = $(".dg-text span.text");
-        var _name = $(".dg-text span.name");
-
-        var _image = $(".dg-image img");
-        var _scene = $(".dialog-scene");
-
-        var _nextbtn = $(".dg-text a.next-btn");
-
-        var cmd, data;
+        var cmd;
 
         _loop:
         while (cmd = this._stage.data[this._index]) {
             this._index++;
-                
+            
             switch (cmd.do) {
                 case "say":
-                    _text.html(cmd.text);
+                    UI_TEXT.html(cmd.text);
 
                     if (cmd.name) {
-                        _name.css('display', '');
-                        _name.html(cmd.name);
+                        UI_NAME.css('display', '');
+                        UI_NAME.html(cmd.name);
                     } else {
-                        _name.css('display', 'none');
+                        UI_NAME.css('display', 'none');
                     }
                     break _loop;
 
                 case "image":
-                    _image.attr('src', cmd.url || this.BLANK_IMG);
-                    break;
+                    var oldUrl = UI_IMAGE.attr('src');
+                    var newUrl = cmd.url || this.BLANK_IMG;
+                    var def = $U.always({ self: this, url: newUrl });
+
+                    if (oldUrl != this.BLANK_IMG) {
+                        def = def.then(function (p) {
+                            UI_IMAGE.addClass('dg-hidden');
+                            return $U.delay(500, p);
+                        });
+                    }
+
+                    if (newUrl != this.BLANK_IMG) {
+                        def = def.then(function (p) {
+                            UI_IMAGE.attr('src', p.url);
+                            UI_IMAGE.removeClass('dg-hidden');
+                            return $U.delay(500, p);
+                        });
+                    }
+
+                    def.then(function (p) {
+                        p.self._busy = false;
+                        p.self.advance();
+                    });
+
+                    this._busy = true;
+                    break _loop;
 
                 case "scene":
-                    $U.setBgImage(_scene, cmd.url);
-                    break;
+                    var def = $U.always({ url: cmd.url, self: this });
+
+                    def.then(function (p) {
+                        UI_FADE.addClass('dg-faded');
+                        return $U.delay(500, p);
+                    }).then(function (p) {
+                        UI_FADE.removeClass('dg-faded');
+                        $U.setBgImage(UI_SCENE, p.url);
+                        return $U.delay(500, p);
+                    }).then(function (p) {
+                        p.self._busy = false;
+                        p.self.advance();
+                    });
+
+                    this._busy = true;
+                    break _loop;
 
                 case "goto":
                     this._goto(cmd.label, cmd.stage);
                     break;
 
                 case "action":
+                    var data;
+                    
                     if (data = this._actions[cmd.name]) {
                         data.call($game);
                     } else if(cmd.name) {
@@ -112,12 +148,14 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
 
                     if (cmd.hide) {
                         this.show(false);
+                    } else if (cmd.show) {
+                        this.show(true);
                     }
                     break;
             }
         }
 
-        _nextbtn.css('display', cmd ? '' : 'none');
+        UI_NEXTBTN.css('display', cmd ? '' : 'none');
     };
 
     dialog._goto = function (label, stage) {
@@ -145,34 +183,41 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
     }
 
     dialog.goto = function (label, stage) {
+        if (this._busy) return;
+
         this._goto(label, stage);
         this.advance();
     }
 
     dialog.show = function (show) {
-        if (!this._stage) return;
+        if (!this._stage || this._busy) return;
 
-        var _dialog = $(".dialog-box");
-        _dialog.css('display', show ? '' : 'none');
-    }
-
-    dialog.begin = function (stage) {
-        this.goto(null, stage);
-        this.show(true);
+        UI_DIALOG.css('display', show ? '' : 'none');
     }
 
     $(document).ready(function () {
-        $(".dg-text a.next-btn").click(function () {
+        UI_TEXT = $(".dg-text span.text");
+        UI_NAME = $(".dg-text span.name");
+
+        UI_IMAGE = $(".dg-image img");
+        UI_SCENE = $(".dialog-scene");
+        UI_FADE = $(".dialog-fade");
+
+        UI_DIALOG = $(".dialog-box");
+        UI_NEXTBTN = $(".dialog-box a.next-btn");
+
+        $(".dialog-box a.next-btn").click(function () {
             dialog.advance();
         });
 
         $(".game .play-btn").click(function () {
             $(this).css('display', 'none');
 
-            dialog.begin('intro');
+            dialog.goto(null, 'intro');
         });
-
-        dialog.BLANK_IMG = $(".dg-image img").attr('src');
+        
+        BLANK_IMG = UI_IMAGE.attr('src');
+        UI_IMAGE.addClass('dg-hidden');
     });
 
 }).call(this);
@@ -189,6 +234,18 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
         } else {
             _obj.css('background-image', 'none');
         }
+    }
+
+    util.delay = function (time, data) {
+        return $.Deferred(function (defer) {
+            setTimeout(defer.resolve.bind(null, data), time);
+        });
+    }
+
+    util.always = function (data) {
+        return $.Deferred(function (defer) {
+            defer.resolve.call(null, data);
+        });
     }
 
 }).call(this);

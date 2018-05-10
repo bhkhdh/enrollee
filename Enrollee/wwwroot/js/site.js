@@ -13,6 +13,18 @@
         }
     }
 
+    util.delay = function (time, data) {
+        return $.Deferred(function (defer) {
+            setTimeout(defer.resolve.bind(null, data), time);
+        });
+    }
+
+    util.always = function (data) {
+        return $.Deferred(function (defer) {
+            defer.resolve.call(null, data);
+        });
+    }
+
 }).call(this);
 
 $(document).ready(function () {

@@ -98,20 +98,53 @@
         color: #E0FFE0;
     }
 
-    .dg-text a.next-btn {
+    .dialog-box a.next-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 2px 10px;
         color: #333;
         background-color: #E0FFE0;
-
-        padding: 0 10px;
-        display: inline-block;
         border-radius: 2px;
+        font-size: 1.5em;
     }
 
-    .dg-text a.next-btn:hover {
+    @media all and (max-width: 440px) {
+        .dialog-box a.next-btn {
+            font-size: 1.1em;
+        }
+    }
+
+    .dialog-box a.next-btn:hover {
         color: #8F3;
         background-color: #333;
     }
 
+    .dg-image {
+        overflow: hidden;
+    }
+
+    .dg-image img {
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .dg-image img.dg-hidden {
+        transform: translate(-100%, 0%);
+    }
+
+    .dialog-fade {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+
+        background-color: rgba(0, 0, 0, 0.0);
+        transition: background-color 0.5s ease-in-out;
+    }
+
+    .dialog-fade.dg-faded {
+        background-color: rgba(0, 0, 0, 1.0);
+    }
 body {
     padding-top: 70px;
     padding-bottom: 20px;

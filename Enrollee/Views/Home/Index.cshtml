@@ -31,12 +31,14 @@
             <div class="dg-text">
                 <span class="name"></span>
                 <span class="text"></span>
-                <a class="next-btn">
-                    <i class="fas fa-forward"></i>
-                </a>
             </div>
         </div>
+        <a class="next-btn">
+            <i class="fas fa-forward"></i>
+        </a>
     </div>
+
+    <div class="dialog-fade"></div>
 
     <img class="play-btn" src="~/images/play-button.png" />
 
@@ -58,6 +60,7 @@
 
     $game.dialog.setStage('intro', [
         { do: "scene", url: "/images/game/scene/scene-1.png" },
+        { do: "action", show: true },
 
         { do: "say", text: "This is some intro text" },
         { do: "say", text: "More text here" },
@@ -76,8 +79,8 @@
         { do: "image", url: null },
         { do: "say", text: "The End™" },
 
-        { do: "scene", url: null },
         { do: "action", hide: true },
+        { do: "scene", url: null },
     ]);
 </script>
 }
