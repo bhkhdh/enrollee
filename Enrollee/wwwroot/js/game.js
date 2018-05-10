@@ -55,17 +55,17 @@
 
                 case "image":
                     var oldUrl = UI_IMAGE.attr('src');
-                    var newUrl = cmd.url || this.BLANK_IMG;
+                    var newUrl = cmd.url || BLANK_IMG;
                     var def = $U.always({ self: this, url: newUrl });
 
-                    if (oldUrl != this.BLANK_IMG) {
+                    if (oldUrl != BLANK_IMG) {
                         def = def.then(function (p) {
                             UI_IMAGE.addClass('dg-hidden');
                             return $U.delay(500, p);
                         });
                     }
 
-                    if (newUrl != this.BLANK_IMG) {
+                    if (newUrl != BLANK_IMG) {
                         def = def.then(function (p) {
                             UI_IMAGE.attr('src', p.url);
                             UI_IMAGE.removeClass('dg-hidden');
