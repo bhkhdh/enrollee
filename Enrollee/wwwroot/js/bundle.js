@@ -34,9 +34,31 @@ $(document).ready(function () {
 $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
 (function () {
 
-    var BLANK_IMG, UI_TEXT, UI_NAME, UI_IMAGE, UI_SCENE, UI_FADE, UI_DIALOG, UI_NEXTBTN;
+    // Game system core
 
-    var $game = window.$game = {};
+    var $game = window.$game = {
+        _mode: null,
+    };
+
+    $game.save = function () {
+        return {
+            mode: this._mode,
+            dialog: this.dialog.save(),
+        };
+    }
+
+    $game.load = function (data) {
+        this._mode = data.mode;
+
+        this.dialog.load(data.dialog);
+        if (data.mode == "dialog") {
+            this.dialog.show(true);
+        }
+    }
+
+    // Dialog system
+
+    var BLANK_IMG, UI_TEXT, UI_NAME, UI_IMAGE, UI_SCENE, UI_FADE, UI_DIALOG, UI_NEXTBTN;
 
     var dialog = $game.dialog = {
         _stages: {},
@@ -48,6 +70,41 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
         _busy: false,
     };
 
+    dialog.save = function () {
+        return {
+            index: this._index,
+            stage: this._stage.name,
+
+            image: UI_IMAGE.attr('src'),
+            scene: $U.getBgImage(UI_SCENE),
+            text: UI_TEXT.html(),
+            name: UI_NAME.html(),
+        };
+    }
+
+    dialog.load = function (data) {
+        this._index = data.index;
+        this._stage = this._stages[data.stage];
+
+        if (data.image) {
+            UI_IMAGE.attr('src', data.image);
+            UI_IMAGE.removeClass('dg-hidden');
+        } else {
+            UI_IMAGE.addClass('dg-hidden');
+        }
+
+        $U.setBgImage(UI_SCENE, data.scene);
+
+        UI_TEXT.html(data.text);
+
+        if (data.name) {
+            UI_NAME.html(data.name);
+            UI_NAME.css('display', '');
+        } else {
+            UI_NAME.css('display', 'none');
+        }
+    }
+
     dialog.setStage = function (name, data) {
         var labels = {};
         for (var i = 0; i < data.length; i++) {
@@ -57,6 +114,7 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
         }
 
         this._stages[name] = {
+            name: name,
             data: data.slice(),
             labels: labels,
         };
@@ -141,15 +199,9 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
                     var data;
                     
                     if (data = this._actions[cmd.name]) {
-                        data.call($game);
+                        data.apply($game, cmd.args);
                     } else if(cmd.name) {
                         console.error("Invalid action '" + cmd.name + "'");
-                    }
-
-                    if (cmd.hide) {
-                        this.show(false);
-                    } else if (cmd.show) {
-                        this.show(true);
                     }
                     break;
             }
@@ -193,7 +245,25 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
         if (!this._stage || this._busy) return;
 
         UI_DIALOG.css('display', show ? '' : 'none');
+
+        if (show && $game._mode == null) {
+            $game._mode = "dialog";
+        } else if (!show && $game.mode == "dialog") {
+            $game._mode = null;
+        }
     }
+
+    // Default dialog actions
+
+    dialog.setAction("show", function () {
+        this.dialog.show(true);
+    });
+
+    dialog.setAction("hide", function () {
+        this.dialog.show(false);
+    });
+
+    // Setup code
 
     $(document).ready(function () {
         UI_TEXT = $(".dg-text span.text");
@@ -225,14 +295,18 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
 
     var util = window.$U = {};
 
-    util.setBgImage = function (target, url) {
-        var _obj = $(target);
+    util.getBgImage = function (target) {
+        var url = $(target).css('background-image');
+        var match = url.match(/url\("(.+)"\)/i);
+        return (match && match[1]) ? match[1] : null;
+    }
 
+    util.setBgImage = function (target, url) {
         if (url) {
-            url = "url('" + url.replace("'", "\\'") + "')";
-            _obj.css('background-image', url);
+            url = 'url("' + url.replace('"', '%22') + '")';
+            $(target).css('background-image', url);
         } else {
-            _obj.css('background-image', 'none');
+            $(target).css('background-image', 'none');
         }
     }
 

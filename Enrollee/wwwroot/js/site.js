@@ -2,14 +2,18 @@
 
     var util = window.$U = {};
 
-    util.setBgImage = function (target, url) {
-        var _obj = $(target);
+    util.getBgImage = function (target) {
+        var url = $(target).css('background-image');
+        var match = url.match(/url\("(.+)"\)/i);
+        return (match && match[1]) ? match[1] : null;
+    }
 
+    util.setBgImage = function (target, url) {
         if (url) {
-            url = "url('" + url.replace("'", "\\'") + "')";
-            _obj.css('background-image', url);
+            url = 'url("' + url.replace('"', '%22') + '")';
+            $(target).css('background-image', url);
         } else {
-            _obj.css('background-image', 'none');
+            $(target).css('background-image', 'none');
         }
     }
 
