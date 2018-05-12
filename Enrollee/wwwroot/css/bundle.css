@@ -146,6 +146,59 @@
     .dialog-fade.dg-faded {
         background-color: rgba(0, 0, 0, 1.0);
     }
+
+.map-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+    @media screen and (orientation: landscape) {
+        .map-body,
+        .map-body img.map-bg {
+            height: 100%;
+        }
+    }
+
+    @media screen and (orientation: portrait) {
+        .map-body,
+        .map-body img.map-bg {
+            width: 100%;
+        }
+    }
+
+    .map-body .map-area {
+        position: absolute;
+
+        background-color: rgba(224, 255, 224, 0.33);
+        border: 1px solid rgb(224, 255, 224);
+        cursor: pointer;
+
+        transition: background-color 0.5s;
+    }
+
+    .map-body .map-area:hover {
+        background-color: rgba(224, 255, 224, 0.66);
+    }
+
+#map-chapter-menu .ch-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+}
+
+    .ch-list > .chapter {
+        width: 30%;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .ch-list > .chapter > .cc-img {
+        width: 100%;
+        cursor: pointer;
+    }
 body {
     padding-top: 70px;
     padding-bottom: 20px;

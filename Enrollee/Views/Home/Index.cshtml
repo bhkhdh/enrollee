@@ -3,9 +3,8 @@
 }
 
 <div class="row welcome-text">
-    <h2>
-        Добро пожаловать на сайт абитуриента</h3>
-        <p>Предлагаем ознакомиться с нашим ВУЗом и пройти интересный квест ;)</p>
+    <h3>Добро пожаловать на сайт абитуриента</h3>
+    <p>Предлагаем ознакомиться с нашим ВУЗом и пройти интересный квест ;)</p>
 </div>
 
 <div class="row video-body">
@@ -38,14 +37,34 @@
         </a>
     </div>
 
-    <div class="dialog-fade"></div>
+    <div class="map-body">
+        <img class="map-bg" src="~/images/game/map-full.png" />
+    </div>
 
     <img class="play-btn" src="~/images/game/play-button.png" />
+
+    <div class="dialog-fade"></div>
 
     <div class="fullscreen-btn">
         <a data-target="game-body">
             <i class="fas fa-window-maximize"></i>
         </a>
+    </div>
+
+
+
+    <div class="modal fade" role="dialog" id="map-chapter-menu">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title">Выберите раздел</h4>
+                </div>
+                <div class="modal-body ch-list"></div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -53,6 +72,13 @@
     @await Component.InvokeAsync("CommentSection")
 </div>
 }
+
+<script type="text/html" id="map-chapter-menu-item">
+    <div class="chapter">
+        <img class="cc-img" src="~/images/game/play-button.png" />
+        <h4 class="cc-text">{chapter}</h4>
+    </div>
+</script>
 
 @section Scripts {
 <script type="text/javascript">
@@ -76,11 +102,17 @@
         { do: "say", name: "Person", text: "Hello!" },
         { do: "say", name: "Person", text: "Here should be some content" },
 
-        { do: "image", url: null },
+        { do: "image", url: null, now: true },
         { do: "say", text: "The End™" },
 
         { do: "action", name: "hide" },
         { do: "scene", url: null },
+
+        { do: "action", name: "ChapterDone" },
+    ]);
+
+    $game.map.addArea('test', [25.5, 5.5, 28.0, 17.6], [
+        {name: "Start Dialog", dialog: "intro"},
     ]);
 </script>
 }
