@@ -1,7 +1,7 @@
 ﻿.game {
-    background: #999;
+    background-color: #16A7CD;
     width: 100%;
-    height: 90vh;
+    height: 100vh;
     position: relative;
 }
 
@@ -19,18 +19,6 @@
         transform: translate(-50%, -50%);
         transition: transform 0.2s ease-in-out;
         cursor: pointer;
-    }
-
-    @media screen and (orientation: landscape) {
-        .game-welcome .play-btn {
-            height: 20%;
-        }
-    }
-
-    @media screen and (orientation: portrait) {
-        .game-welcome .play-btn {
-            width: 20%;
-        }
     }
 
     .game-welcome .play-btn:hover {
@@ -221,11 +209,10 @@
         text-align: center;
     }
 
-    .ch-list > .chapter > .cc-img {
-        width: 100%;
-        cursor: pointer;
-    }
-
+        .ch-list > .chapter > .cc-img {
+            width: 100%;
+            cursor: pointer;
+        }
 #map-chapter-menu .ch-title {
     font-style: italic;
 }
@@ -234,7 +221,6 @@
     position: absolute;
     width: 100%;
     height: 100%;
-
     border: none;
 }
 
@@ -243,4 +229,53 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+        }
+
+
+
+/*play button*/
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.stroke-dotted {
+    opacity: 0;
+    stroke-dasharray: 4, 5;
+    stroke-width: 1.5px;
+    transform-origin: 50% 50%;
+    animation: spin 4s infinite linear;
+    transition: opacity 1s ease, stroke-width 1s ease;
+}
+
+.stroke-solid {
+    stroke-dashoffset: 0;
+    stroke-dashArray: 300;
+    stroke-width: 4px;
+    transition: stroke-dashoffset 1s ease, opacity 1s ease;
+}
+
+.icon {
+    transform-origin: 50% 50%;
+    transition: transform 200ms ease-out;
+}
+
+#play:hover .stroke-dotted {
+    opacity: 1;
+}
+
+#play:hover .stroke-solid {
+    opacity: 0;
+    stroke-dashoffset: 300;
+}
+
+#play:hover .icon {
+    transform: scale(1.05);
+}
+
+#play {
+    cursor: pointer;
+    margin-top: -2%;
 }

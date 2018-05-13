@@ -10,7 +10,7 @@
 <div class="row">
     <ul class="list-inline">
         <li>
-            <p style="margin:10px;">@Model.PageIndex / @Model.TotalPages страниц</p>
+            <p style="margin:10px;">@Math.Min(Model.PageIndex, Model.TotalPages) / @Model.TotalPages страниц</p>
         </li>
         <li>
             <a data-page="@(Model.PageIndex - 1)"
