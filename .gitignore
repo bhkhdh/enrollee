@@ -336,3 +336,4 @@ _[Ss]cripts
 *.ncrunchsolution
 *.dot[Cc]over
 /Enrollee/appsettings.Production.json
+/Enrollee/wwwroot/**/desktop.ini
