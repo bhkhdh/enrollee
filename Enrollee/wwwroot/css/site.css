@@ -112,11 +112,11 @@ div.has-bg {
     background-size: contain;
 }
 
-    div.has-bg > img {
+    div.has-bg > img.is-bg {
         display: none;
     }
 
-.fullscreen-btn {
+.system-menu {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -124,10 +124,11 @@ div.has-bg {
     font-size: 1.25em;
 }
 
-    .fullscreen-btn > a {
+    .system-menu a {
         color: #333;
+        margin: 0 5px;
     }
 
-    .fullscreen-btn > a:hover {
+    .system-menu a:hover {
         color: #8F3;
     }

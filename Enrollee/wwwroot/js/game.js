@@ -1,5 +1,10 @@
 ﻿(function () {
 
+    var MN_NEWGAME;
+    var GM_WELCOME, GM_PLAYBTN;
+    var MAP_BODY, MAP_IMAGE, MAP_CHP_MENU, MAP_CHP_LIST;
+    var BLANK_IMG, DG_TEXT, DG_NAME, DG_IMAGE, DG_SCENE, DG_FADE, DG_FADETXT, DG_DIALOG, DG_NEXTBTN;
+
     // Game system core
 
     var $game = window.$game = {
@@ -7,6 +12,14 @@
 
         busy: false,
     };
+
+    $game.new = function () {
+        this.mode("map");
+    };
+
+    $game.reset = function () {
+        this.mode("welcome");
+    }
 
     $game.save = function () {
         return {
@@ -30,21 +43,31 @@
             case "dialog":
                 this.map.show(false);
                 this.dialog.goto(null, a1);
+                this._showWelcome(false);
                 break;
             case "map":
                 this.map.show(true);
                 this.dialog.show(false);
+                this._showWelcome(false);
+                break;
+            case "welcome":
+                this.map.show(false);
+                this.dialog.show(false);
+                this._showWelcome(true);
                 break;
             default:
                 console.error("Invalid mode '" + name + "'");
+                break;
         }
 
         this._mode = name;
     };
 
-    // Map system
+    $game._showWelcome = function (show) {
+        GM_WELCOME.css('display', show ? '' : 'none');
+    }
 
-    var MAP_BODY, MAP_IMAGE, MAP_CHP_MENU, MAP_CHP_LIST;
+    // Map system
 
     var map = $game.map = {
         _areas: {},
@@ -129,8 +152,6 @@
     };
 
     // Dialog system
-
-    var BLANK_IMG, DG_TEXT, DG_NAME, DG_IMAGE, DG_SCENE, DG_FADE, DG_DIALOG, DG_NEXTBTN;
 
     var dialog = $game.dialog = {
         _stages: {},
@@ -252,12 +273,21 @@
                     }
 
                 case "scene":
-                    var def = $U.always({ url: cmd.url, self: this });
+                    var def = $U.always({ url: cmd.url, text: cmd.text, self: this });
 
-                    def.then(function (p) {
+                    def = def.then(function (p) {
+                        DG_FADETXT.html(p.text || null);
                         DG_FADE.addClass('dg-faded');
                         return $U.delay(500, p);
-                    }).then(function (p) {
+                    });
+
+                    if (cmd.text) {
+                        def = def.then(function (p) {
+                            return $U.delay(1000, p);
+                        });
+                    }
+
+                    def.then(function (p) {
                         DG_FADE.removeClass('dg-faded');
                         $U.setBgImage(DG_SCENE, p.url);
                         return $U.delay(500, p);
@@ -345,12 +375,19 @@
     $(document).ready(function () {
         // Element references
 
+        MN_NEWGAME = $("a.newgame-btn");
+
+        GM_WELCOME = $(".game-welcome");
+        GM_PLAYBTN = $(".game-welcome .play-btn");
+
         DG_TEXT = $(".dg-text span.text");
         DG_NAME = $(".dg-text span.name");
 
         DG_IMAGE = $(".dg-image img");
         DG_SCENE = $(".dialog-scene");
+
         DG_FADE = $(".dialog-fade");
+        DG_FADETXT = $(".dialog-fade .fade-text");
 
         DG_DIALOG = $(".dialog-box");
         DG_NEXTBTN = $(".dialog-box a.next-btn");
@@ -372,16 +409,15 @@
 
         // Base setup
 
-        $(".game .play-btn").click(function () {
-            $(this).css('display', 'none');
-
-            // TODO: Start logic
-            $game.mode("map");
+        GM_PLAYBTN.click(function () {
+            $game.new();
         });
 
-        DG_SCENE.css('display', 'none');
-        DG_DIALOG.css('display', 'none');
-        MAP_BODY.css('display', 'none');
+        MN_NEWGAME.click(function () {
+            if (confirm("Действительно начать игру заново?")) {
+                $game.reset();
+            }
+        });
     });
 
 }).call(this);
