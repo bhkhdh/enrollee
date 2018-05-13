@@ -12,7 +12,7 @@
     height: 100%;
 }
 
-    .game-welcome .play-btn {
+    /*.game-welcome .play-btn {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -23,7 +23,7 @@
 
     .game-welcome .play-btn:hover {
         transform: translate(-50%, -50%) scale(1.2, 1.2);
-    }
+    }*/
 
 
 .dialog-box {
@@ -185,17 +185,6 @@
         background-color: rgba(224, 255, 224, 0.66);
     }
 
-    /*.map-area .title {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        padding: 4px 10px;
-        border-radius: 4px;
-        color: white;
-    }*/
-
 #map-chapter-menu .ch-list {
     display: flex;
     flex-wrap: wrap;
@@ -229,19 +218,17 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
 
-        }
+/* Play Button */
 
-
-
-/*play button*/
 @keyframes spin {
     to {
         transform: rotate(360deg);
     }
 }
 
-.stroke-dotted {
+.play-btn .stroke-dotted {
     opacity: 0;
     stroke-dasharray: 4, 5;
     stroke-width: 1.5px;
@@ -250,32 +237,35 @@
     transition: opacity 1s ease, stroke-width 1s ease;
 }
 
-.stroke-solid {
+.play-btn .stroke-solid {
     stroke-dashoffset: 0;
     stroke-dashArray: 300;
     stroke-width: 4px;
     transition: stroke-dashoffset 1s ease, opacity 1s ease;
 }
 
-.icon {
+.play-btn .icon {
     transform-origin: 50% 50%;
     transition: transform 200ms ease-out;
 }
 
-#play:hover .stroke-dotted {
+.play-btn:hover .stroke-dotted {
     opacity: 1;
 }
 
-#play:hover .stroke-solid {
+.play-btn:hover .stroke-solid {
     opacity: 0;
     stroke-dashoffset: 300;
 }
 
-#play:hover .icon {
+.play-btn:hover .icon {
     transform: scale(1.05);
 }
 
-#play {
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     cursor: pointer;
-    margin-top: -2%;
 }

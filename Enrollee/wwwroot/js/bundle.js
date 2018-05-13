@@ -76,32 +76,32 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
 
         switch (name) {
             case "dialog":
-                this.dialog.goto(null, a1);
-
                 this.map.show(false);
                 this.quest.show(null);
                 this._showWelcome(false);
+
+                this.dialog.goto(null, a1);
                 break;
             case "map":
-                this.map.show(true);
-
                 this.dialog.show(false);
                 this.quest.show(null);
                 this._showWelcome(false);
+
+                this.map.show(true);
                 break;
             case "welcome":
-                this._showWelcome(true);
-
                 this.map.show(false);
                 this.dialog.show(false);
                 this.quest.show(null);
+
+                this._showWelcome(true);
                 break;
             case "quest":
-                this.quest.show(a1);
-
                 this.map.show(false);
                 this.dialog.show(false);
                 this._showWelcome(false);
+
+                this.quest.show(a1);
                 break;
             default:
                 console.error("Invalid mode '" + name + "'");
