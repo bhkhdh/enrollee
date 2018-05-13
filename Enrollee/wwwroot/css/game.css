@@ -1,0 +1,271 @@
+﻿.game {
+    background-color: #16A7CD;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.game-welcome,
+.dialog-scene {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+    /*.game-welcome .play-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: transform 0.2s ease-in-out;
+        cursor: pointer;
+    }
+
+    .game-welcome .play-btn:hover {
+        transform: translate(-50%, -50%) scale(1.2, 1.2);
+    }*/
+
+
+.dialog-box {
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+
+    background: linear-gradient(rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0.7) 10%);
+}
+
+    .dialog-box .dg-body {
+        display: flex;
+    }
+
+    .dg-body .dg-image {
+        flex-basis: 20%;
+    }
+
+    .dg-image > img {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+    }
+
+    .dg-body .dg-text {
+        flex-basis: 80%;
+        padding: 10px;
+        font-size: 1.5em;
+    }
+
+    @media all and (min-width: 1000px) {
+        .dg-body .dg-image {
+            flex-basis: 200px;
+        }
+
+        .dg-body .dg-text {
+            flex-basis: auto;
+        }
+    }
+
+    @media all and (max-width: 440px) {
+        .dg-body .dg-image {
+            flex-basis: 88px;
+        }
+
+        .dg-body .dg-text {
+            flex-basis: auto;
+            font-size: 1.1em;
+        }
+    }
+
+    .dg-text .name {
+        color: #E0FFE0;
+        font-style: italic;
+    }
+
+    .dg-text .name::after {
+        content: ': ';
+    }
+
+    .dg-text .text {
+        color: #E0FFE0;
+    }
+
+    .dialog-box a.next-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 2px 10px;
+        color: #333;
+        background-color: #E0FFE0;
+        border-radius: 2px;
+        font-size: 1.5em;
+    }
+
+    @media all and (max-width: 440px) {
+        .dialog-box a.next-btn {
+            font-size: 1.1em;
+        }
+    }
+
+    .dialog-box a.next-btn:hover {
+        color: #8F3;
+        background-color: #371;
+    }
+
+    .dg-image {
+        overflow: hidden;
+    }
+
+    .dg-image img {
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .dg-image img.dg-hidden {
+        transform: translate(-100%, 0%);
+    }
+
+    .dialog-fade {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+
+        background-color: rgba(0, 0, 0, 0.0);
+        transition: background-color 0.5s ease-in-out;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .dialog-fade.dg-faded {
+        pointer-events: initial;
+        background-color: rgba(0, 0, 0, 1.0);
+    }
+
+        .dialog-fade .fade-text {
+            color: rgba(255, 255, 255, 0);
+            transition: color 0.5s ease-in-out;
+        }
+
+        .dialog-fade.dg-faded .fade-text {
+            color: rgba(255, 255, 255, 1.0);
+        }
+
+.map-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+    @media screen and (orientation: landscape) {
+        .map-body,
+        .map-body img.map-bg {
+            height: 100%;
+        }
+    }
+
+    @media screen and (orientation: portrait) {
+        .map-body,
+        .map-body img.map-bg {
+            width: 100%;
+        }
+    }
+
+    .map-body .map-area {
+        position: absolute;
+
+        background-color: rgba(224, 255, 224, 0.33);
+        border: 1px solid rgb(224, 255, 224);
+        cursor: pointer;
+
+        transition: background-color 0.5s;
+    }
+
+    .map-body .map-area:hover {
+        background-color: rgba(224, 255, 224, 0.66);
+    }
+
+#map-chapter-menu .ch-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+}
+
+    .ch-list > .chapter {
+        width: 30%;
+        padding: 10px;
+        text-align: center;
+    }
+
+        .ch-list > .chapter > .cc-img {
+            width: 100%;
+            cursor: pointer;
+        }
+#map-chapter-menu .ch-title {
+    font-style: italic;
+}
+
+.quest-embed {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.quest-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Play Button */
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.play-btn .stroke-dotted {
+    opacity: 0;
+    stroke-dasharray: 4, 5;
+    stroke-width: 1.5px;
+    transform-origin: 50% 50%;
+    animation: spin 4s infinite linear;
+    transition: opacity 1s ease, stroke-width 1s ease;
+}
+
+.play-btn .stroke-solid {
+    stroke-dashoffset: 0;
+    stroke-dashArray: 300;
+    stroke-width: 4px;
+    transition: stroke-dashoffset 1s ease, opacity 1s ease;
+}
+
+.play-btn .icon {
+    transform-origin: 50% 50%;
+    transition: transform 200ms ease-out;
+}
+
+.play-btn:hover .stroke-dotted {
+    opacity: 1;
+}
+
+.play-btn:hover .stroke-solid {
+    opacity: 0;
+    stroke-dashoffset: 300;
+}
+
+.play-btn:hover .icon {
+    transform: scale(1.05);
+}
+
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}

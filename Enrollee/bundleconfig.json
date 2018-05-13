@@ -1,24 +1,21 @@
 [
   {
-    "outputFileName": "wwwroot/css/site.min.css",
+    "outputFileName": "wwwroot/css/bundle.css",
     "inputFiles": [
+      "wwwroot/css/game.css",
       "wwwroot/css/site.css"
-    ]
+    ],
+    "sourceMap": false,
+    "sourceMapRootPath": null
   },
   {
-    "outputFileName": "wwwroot/js/site.min.js",
+    "outputFileName": "wwwroot/js/bundle.js",
     "inputFiles": [
+      "wwwroot/js/comments.js",
+      "wwwroot/js/game.js",
       "wwwroot/js/site.js"
     ],
-    "minify": {
-      "enabled": true,
-      "renameLocals": true
-    }
-  },
-  {
-    "outputFileName": "wwwroot/lib/font-awesome/all.min.css",
-    "inputFiles": [
-      "wwwroot/lib/font-awesome/all.css"
-    ]
+    "sourceMap": false,
+    "sourceMapRootPath": null
   }
 ]
