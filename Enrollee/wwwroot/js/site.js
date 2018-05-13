@@ -32,15 +32,18 @@
 }).call(this);
 
 $(document).ready(function () {
-    $("div.has-bg img").each(function () {
+    $("div.has-bg img.is-bg").each(function () {
         var _obj = $(this);
 
         $U.setBgImage(_obj.parent(), _obj.attr('src'));
         _obj.remove();
     });
 
-    var button = $(".fullscreen-btn > a");
-    button.attr('href', 'javascript:void(0)');
+    $(".system-menu > a").each(function () {
+        $(this).attr('href', 'javascript:void(0)');
+    });
+
+    var button = $("a.fullscreen-btn");
     button.click(function () {
         if (document.fullscreenElement
         || document.webkitFullscreenElement

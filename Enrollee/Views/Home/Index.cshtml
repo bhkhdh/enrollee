@@ -2,10 +2,11 @@
     ViewData["Title"] = "Главная Страница";
 }
 
+@inject SignInManager<ApplicationUser> SignInManager
+
 <div class="row welcome-text">
-    <h2>
-        Добро пожаловать на сайт абитуриента</h3>
-        <p>Предлагаем ознакомиться с нашим ВУЗом и пройти интересный квест ;)</p>
+    <h3>Добро пожаловать на сайт абитуриента</h3>
+    <p>Предлагаем ознакомиться с нашим ВУЗом и пройти интересный квест ;)</p>
 </div>
 
 <div class="row video-body">
@@ -18,69 +19,57 @@
 </div>
 
 @section RawBody {
-<div class="game" id="game-body">
-    <div class="dialog-scene has-bg">
-        <img src="~/images/game/welcome-screen.png" />
-    </div>
-
-    <div class="dialog-box" style="display: none">
-        <div class="dg-body">
-            <div class="dg-image">
-                <img src="~/images/game/dialog/_blank.png" />
-            </div>
-            <div class="dg-text">
-                <span class="name"></span>
-                <span class="text"></span>
+    @if(User.Identity.IsAuthenticated) {
+        @await Html.PartialAsync("GameCorePartial")
+    } else {
+        <div class="container">
+            <div class="alert alert-danger">
+                <strong>Внимание!</strong>
+                Вы должны войти в систему для прохождения квеста!
             </div>
         </div>
-        <a class="next-btn">
-            <i class="fas fa-forward"></i>
-        </a>
+    }
+
+    <div class="container">
+        @await Component.InvokeAsync("CommentSection")
     </div>
-
-    <div class="dialog-fade"></div>
-
-    <img class="play-btn" src="~/images/game/play-button.png" />
-
-    <div class="fullscreen-btn">
-        <a data-target="game-body">
-            <i class="fas fa-window-maximize"></i>
-        </a>
-    </div>
-</div>
-
-<div class="container">
-    @await Component.InvokeAsync("CommentSection")
-</div>
 }
 
 @section Scripts {
-<script type="text/javascript">
-    // Hardcoded test, remove later
+    <link rel="preload" href="~/images/game/map-full.png" as="image" />
 
-    $game.dialog.setStage('intro', [
-        { do: "scene", url: "/images/game/scene/scene-1.png" },
-        { do: "action", name: "show" },
+    <script type="text/javascript">
+        // Hardcoded test, remove later
 
-        { do: "say", text: "This is some intro text" },
-        { do: "say", text: "More text here" },
+        $game.dialog.setStage('intro', [
+            { do: "scene", url: "/images/game/scene/scene-1.png" },
+            { do: "action", name: "show" },
 
-        { do: "goto", stage: "test-1" },
-    ]);
+            { do: "say", text: "This is some intro text" },
+            { do: "say", text: "More text here" },
+
+            { do: "goto", stage: "test-1" },
+        ]);
 
 
-    $game.dialog.setStage('test-1', [
-        { do: "scene", url: "/images/game/scene/scene-2.png" },
+        $game.dialog.setStage('test-1', [
+            { do: "scene", url: "/images/game/scene/scene-2.png", text: "[memes]" },
 
-        { do: "image", url: "/images/game/dialog/person-1.png" },
-        { do: "say", name: "Person", text: "Hello!" },
-        { do: "say", name: "Person", text: "Here should be some content" },
+            { do: "image", url: "/images/game/dialog/person-1.png" },
+            { do: "say", name: "Person", text: "Hello!" },
+            { do: "say", name: "Person", text: "Here should be some content" },
 
-        { do: "image", url: null },
-        { do: "say", text: "The End™" },
+            { do: "image", url: null },
+            { do: "say", text: "The End™" },
 
-        { do: "action", name: "hide" },
-        { do: "scene", url: null },
-    ]);
-</script>
+            { do: "action", name: "hide" },
+            { do: "scene", url: null },
+
+            { do: "action", name: "ChapterDone" },
+        ]);
+
+        $game.map.addArea('test', [25.5, 5.5, 28.0, 17.6], "Testing", [
+            { name: "Start Dialog", dialog: "intro" },
+        ]);
+    </script>
 }

@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\desktop.ini" />
     <Content Remove="wwwroot\images\game\dialog\desktop.ini" />
     <Content Remove="wwwroot\images\game\scene\desktop.ini" />
   </ItemGroup>
