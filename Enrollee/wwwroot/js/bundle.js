@@ -38,6 +38,7 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
     var GM_WELCOME, GM_PLAYBTN;
     var MAP_BODY, MAP_IMAGE, MAP_CHP_MENU, MAP_CHP_LIST;
     var BLANK_IMG, DG_TEXT, DG_NAME, DG_IMAGE, DG_SCENE, DG_FADE, DG_FADETXT, DG_DIALOG, DG_NEXTBTN;
+    var QST_IFRAME, QST_LOADING;
 
     // Game system core
 
@@ -75,19 +76,32 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
 
         switch (name) {
             case "dialog":
-                this.map.show(false);
                 this.dialog.goto(null, a1);
+
+                this.map.show(false);
+                this.quest.show(null);
                 this._showWelcome(false);
                 break;
             case "map":
                 this.map.show(true);
+
                 this.dialog.show(false);
+                this.quest.show(null);
                 this._showWelcome(false);
                 break;
             case "welcome":
+                this._showWelcome(true);
+
                 this.map.show(false);
                 this.dialog.show(false);
-                this._showWelcome(true);
+                this.quest.show(null);
+                break;
+            case "quest":
+                this.quest.show(a1);
+
+                this.map.show(false);
+                this.dialog.show(false);
+                this._showWelcome(false);
                 break;
             default:
                 console.error("Invalid mode '" + name + "'");
@@ -117,10 +131,11 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
 
     };
 
-    map.addArea = function (name, pos, menu) {
+    map.addArea = function (name, pos, title, menu) {
         var area = this._areas[name] = {
             name: name,
             pos: pos.slice(),
+            title: title,
             menu: menu.slice(),
         };
     };
@@ -131,14 +146,14 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
         if (show && !this._init) {
             this._init = true;
 
+            var item_tpl = $("#map-area-tpl").html();
+
             for (var k in this._areas) {
                 if (!this._areas.hasOwnProperty(k)) continue;
 
                 var area = this._areas[k];
-                var dom = area.elem = $("<div></div>");
-
+                var dom = area.elem = $(item_tpl);
                 dom.appendTo(MAP_BODY);
-                dom.addClass('map-area');
 
                 dom.css('left', area.pos[0] + '%');
                 dom.css('top', area.pos[1] + '%');
@@ -153,9 +168,12 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
     };
 
     map._showChapterMenu = function (data) {
-        var item_tpl = $("#map-chapter-menu-item").html();
+        var item_tpl = $("#map-chapter-menu-tpl").html();
 
         MAP_CHP_LIST.html(null);
+
+        var ch_title = $(".ch-title", MAP_CHP_MENU);
+        ch_title.html(data.title);
 
         for (var i = 0; i < data.menu.length; i++) {
             var item = data.menu[i];
@@ -404,6 +422,46 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
         this.mode("map");
     });
 
+    // Quest system
+
+    var quest = $game.quest = {
+        _isload: false,
+    };
+
+    quest.save = function () {
+        return {
+
+        };
+    };
+
+    quest.load = function (data) {
+
+    };
+
+    quest.show = function (url) {
+        if (url) {
+            $game.busy = true;
+            this._isload = true;
+
+            QST_IFRAME.attr('src', url);
+            QST_LOADING.css('display', '');
+        } else {
+            QST_IFRAME.attr('src', 'about:blank');
+            QST_IFRAME.css('display', 'none');
+            QST_LOADING.css('display', 'none');
+        }
+    };
+
+    quest._onLoad = function () {
+        if (this._isload) {
+            $game.busy = false;
+            this._isload = false;
+
+            QST_IFRAME.css('display', '');
+            QST_LOADING.css('display', 'none');
+        }
+    }
+
     // Setup code
 
     $(document).ready(function () {
@@ -435,10 +493,19 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
         MAP_CHP_MENU = $("#map-chapter-menu");
         MAP_CHP_LIST = $("#map-chapter-menu .ch-list");
 
+        QST_IFRAME = $("iframe.quest-embed");
+        QST_LOADING = $(".quest-loading");
+
         // Dialog setup
 
         DG_NEXTBTN.click(function () {
             $game.dialog.advance();
+        });
+
+        // Quest setup
+
+        QST_IFRAME.on('load', function () {
+            $game.quest._onLoad();
         });
 
         // Base setup

@@ -8,7 +8,7 @@ namespace Enrollee.Controllers
 {
     public class QuestController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Game1()
         {
             return View();
         }

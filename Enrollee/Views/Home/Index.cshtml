@@ -2,6 +2,8 @@
     ViewData["Title"] = "Главная Страница";
 }
 
+@inject SignInManager<ApplicationUser> SignInManager
+
 <div class="row welcome-text">
     <h3>Добро пожаловать на сайт абитуриента</h3>
     <p>Предлагаем ознакомиться с нашим ВУЗом и пройти интересный квест ;)</p>
@@ -17,80 +19,25 @@
 </div>
 
 @section RawBody {
-    <div class="game" id="game-body">
-        <div class="dialog-scene has-bg"></div>
-
-        <div class="dialog-box" style="display: none">
-            <div class="dg-body">
-                <div class="dg-image">
-                    <img src="~/images/game/dialog/_blank.png" />
-                </div>
-                <div class="dg-text">
-                    <span class="name"></span>
-                    <span class="text"></span>
-                </div>
-            </div>
-            <a class="next-btn">
-                <i class="fas fa-forward"></i>
-            </a>
-        </div>
-
-        <div class="map-body" style="display: none">
-            <img class="map-bg" src="~/images/game/map-full.png" />
-        </div>
-
-        <div class="game-welcome has-bg">
-            <img class="is-bg" src="~/images/game/welcome-screen.png" />
-            <img class="play-btn" src="~/images/game/play-button.png" />
-        </div>
-
-        <div class="dialog-fade">
-            <h3 class="fade-text"></h3>
-        </div>
-
-        <div class="system-menu">
-            <a class="newgame-btn">
-                <i class="fas fa-redo-alt"></i>
-            </a>
-            <a class="fullscreen-btn" data-target="game-body">
-                <i class="fas fa-window-maximize"></i>
-            </a>
-        </div>
-
-
-
-        <div class="modal fade" role="dialog" id="map-chapter-menu">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
-                        <h4 class="modal-title">Выберите раздел</h4>
-                    </div>
-                    <div class="modal-body ch-list"></div>
-                </div>
+    @if(User.Identity.IsAuthenticated) {
+        @await Html.PartialAsync("GameCorePartial")
+    } else {
+        <div class="container">
+            <div class="alert alert-danger">
+                <strong>Внимание!</strong>
+                Вы должны войти в систему для прохождения квеста!
             </div>
         </div>
-    </div>
+    }
 
     <div class="container">
         @await Component.InvokeAsync("CommentSection")
     </div>
 }
 
-<script type="text/html" id="map-chapter-menu-item">
-    <div class="chapter">
-        <img class="cc-img" src="~/images/game/play-button.png" />
-        <h4 class="cc-text">{chapter}</h4>
-    </div>
-</script>
-
-@section Head {
-    <link rel="preload" href="~/images/game/map-full.png" as="image" />
-}
-
 @section Scripts {
+    <link rel="preload" href="~/images/game/map-full.png" as="image" />
+
     <script type="text/javascript">
         // Hardcoded test, remove later
 
@@ -121,7 +68,7 @@
             { do: "action", name: "ChapterDone" },
         ]);
 
-        $game.map.addArea('test', [25.5, 5.5, 28.0, 17.6], [
+        $game.map.addArea('test', [25.5, 5.5, 28.0, 17.6], "Testing", [
             { name: "Start Dialog", dialog: "intro" },
         ]);
     </script>

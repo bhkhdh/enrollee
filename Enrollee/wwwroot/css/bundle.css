@@ -18,6 +18,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         transition: transform 0.2s ease-in-out;
+        cursor: pointer;
     }
 
     @media screen and (orientation: landscape) {
@@ -148,6 +149,7 @@
     }
 
     .dialog-fade.dg-faded {
+        pointer-events: initial;
         background-color: rgba(0, 0, 0, 1.0);
     }
 
@@ -195,6 +197,17 @@
         background-color: rgba(224, 255, 224, 0.66);
     }
 
+    /*.map-area .title {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        padding: 4px 10px;
+        border-radius: 4px;
+        color: white;
+    }*/
+
 #map-chapter-menu .ch-list {
     display: flex;
     flex-wrap: wrap;
@@ -212,6 +225,25 @@
         width: 100%;
         cursor: pointer;
     }
+
+#map-chapter-menu .ch-title {
+    font-style: italic;
+}
+
+.quest-embed {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    border: none;
+}
+
+.quest-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 body {
     padding-top: 70px;
     padding-bottom: 20px;
@@ -250,14 +282,28 @@ body {
     height: 100%;
 }
 
+.body-content,
 .raw-body {
     margin-bottom: 20px;
 }
 
 footer {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+
+    footer .share {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-bottom: 10px;
+    }
+
+    footer .share > .spacer {
+        margin: 0 5px;
+    }
 
 /* Carousel */
 
@@ -346,3 +392,65 @@ div.has-bg {
     .system-menu a:hover {
         color: #8F3;
     }
+
+
+/* Loader Animation */
+
+.spinner {
+    margin: 100px auto;
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    font-size: 10px;
+}
+
+    .spinner > div {
+        background-color: #333;
+        height: 100%;
+        width: 6px;
+        display: inline-block;
+        -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+        animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    }
+
+    .spinner .rect2 {
+        -webkit-animation-delay: -1.1s;
+        animation-delay: -1.1s;
+    }
+
+    .spinner .rect3 {
+        -webkit-animation-delay: -1.0s;
+        animation-delay: -1.0s;
+    }
+
+    .spinner .rect4 {
+        -webkit-animation-delay: -0.9s;
+        animation-delay: -0.9s;
+    }
+
+    .spinner .rect5 {
+        -webkit-animation-delay: -0.8s;
+        animation-delay: -0.8s;
+    }
+
+@-webkit-keyframes sk-stretchdelay {
+    0%, 40%, 100% {
+        -webkit-transform: scaleY(0.4)
+    }
+
+    20% {
+        -webkit-transform: scaleY(1.0)
+    }
+}
+
+@keyframes sk-stretchdelay {
+    0%, 40%, 100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+    }
+
+    20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+    }
+}
