@@ -121,6 +121,10 @@
         transition: transform 0.5s ease-in-out;
     }
 
+    .dg-text.dg-hidden {
+        opacity:0%;
+    }
+
     .dg-image img.dg-hidden {
         transform: translate(-100%, 0%);
     }

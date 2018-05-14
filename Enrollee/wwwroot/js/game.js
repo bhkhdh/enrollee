@@ -174,7 +174,7 @@
                 dom.css('top', area.pos[1] + '%');
                 dom.css('width', area.pos[2] + '%');
                 dom.css('height', area.pos[3] + '%');
-                
+
                 dom.click(this._showChapterMenu.bind(this, area));
             }
         };
@@ -263,8 +263,10 @@
         if (data.image) {
             DG_IMAGE.attr('src', data.image);
             DG_IMAGE.removeClass('dg-hidden');
+            DG_TEXT.removeClass('dg-hidden');
         } else {
             DG_IMAGE.addClass('dg-hidden');
+            DG_TEXT.addClass('dg-hidden');
         }
 
         $U.setBgImage(DG_SCENE, data.scene);
@@ -307,7 +309,7 @@
         _loop:
         while (cmd = this._stage.data[this._index]) {
             this._index++;
-            
+
             switch (cmd.do) {
                 case "say":
                     DG_TEXT.html(cmd.text);
@@ -326,8 +328,8 @@
                     var newUrl = cmd.url || BLANK_IMG;
 
                     if (cmd.now
-                    && oldUrl != BLANK_IMG
-                    && newUrl != BLANK_IMG) {
+                        && oldUrl != BLANK_IMG
+                        && newUrl != BLANK_IMG) {
                         DG_IMAGE.attr('src', newUrl);
                         break;
                     } else {
@@ -337,6 +339,7 @@
 
                         if (oldUrl != BLANK_IMG) {
                             def = def.then(function (p) {
+                                DG_TEXT.addClass('dg-hidden');
                                 DG_IMAGE.addClass('dg-hidden');
                                 return $U.delay(500, p);
                             });
@@ -345,6 +348,7 @@
                         if (newUrl != BLANK_IMG) {
                             def = def.then(function (p) {
                                 DG_IMAGE.attr('src', p.url);
+                                DG_TEXT.removeClass('dg-hidden');
                                 DG_IMAGE.removeClass('dg-hidden');
                                 return $U.delay(500, p);
                             });
@@ -397,13 +401,13 @@
 
                 case "action":
                     var data;
-                    
+
                     if (data = this._actions[cmd.name]) {
                         if (data.apply($game, cmd.args)) break _loop;
-                    } else if(cmd.name) {
+                    } else if (cmd.name) {
                         console.error("Invalid action '" + cmd.name + "'");
                     }
-                    
+
                     break;
             }
         }
@@ -601,7 +605,7 @@
             var saved = $("#game-save-data").text();
 
             if (saved.length > 0
-            && confirm("Загрузить ранее сохранённый прогресс?")) {
+                && confirm("Загрузить ранее сохранённый прогресс?")) {
                 $game.serverLoad();
             } else {
                 $game.new();

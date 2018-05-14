@@ -12,16 +12,13 @@ var C_FRIEND1_1 = "/images/game/dialog/friend1-1.png";
 var CHR_FRIEND2 = "Джей";
 var C_FRIEND2_1 = "/images/game/dialog/friend2-1.png";
 
-var CHR_FRIEND3 = "Ваня";
-var C_FRIEND3_1 = null; // ** NO IMAGE!
-
 var CHR_WOMAN1 = "Женщина с комиссии";
 var C_WOMAN1_1 = "/images/game/dialog/woman1-1.png";
 var C_WOMAN1_2 = "/images/game/dialog/woman1-2.png";
 var C_WOMAN1_3 = "/images/game/dialog/woman1-3.png";
 
 var CHR_TOGETHER1 = "Саша, Джей";
-var C_TOGETHER1_1 = null; // ** Combine C_YOU_1 & C_FRIEND2_1 maybe?
+var C_TOGETHER1_1 = "/images/game/dialog/c-friend-2.png"; // ** Combine C_YOU_1 & C_FRIEND2_1 maybe?
 
 var CHR_DEKAN = "Декан";
 var C_DEKAN_1 = "/images/game/dialog/dekan1-1.png";
@@ -34,7 +31,9 @@ var SC_PARK = "/images/game/scene/park.png";
 var SC_KHNUE1 = "/images/game/scene/khnue1.png";
 var SC_KHNUE2 = "/images/game/scene/khnue2.png";
 var SC_KHNUE3 = "/images/game/scene/khnue3.png";
-var SC_LECTURE = "/images/game/scene/lecture.png"
+var SC_DEKAN = "/images/game/scene/dekan.png";
+var SC_LECTURE = "/images/game/scene/lecture.png";
+var SC_LAST = "/images/KhNUE.jpg";
 
 var I_DOCUMENTS = "/images/game/misc/documents.png";
 
@@ -59,7 +58,7 @@ function goto(stage, label) {
 
 
 $game.dialog.setStage('intro-1', [
-    scene(SC_HOME, "(Дома)"),
+    scene(SC_HOME, "Дома у Саши"),
     action("show"),
 
     image(null),
@@ -96,23 +95,19 @@ $game.dialog.setStage('intro-1', [
 ]);
 
 $game.dialog.setStage('intro-2', [
-    scene(SC_PARK, "(На улице с друзьями)"),
+    scene(SC_PARK, "На улице с друзьями"),
     action("show"),
 
     image(C_YOU_1),
     say("Хеллоу гайз, как ваши дела? Скажите, это только у меня дома все разговоры про поступление или у вас тоже?", CHR_YOU),
 
     image(C_FRIEND1_1),
-    say("Та не, я уже давно определился, хочу быть программистом. А у нас единственный специализированный ВУЗ где смогут нормально научить. Поэтому долго выбирать не пришлось.", CHR_FRIEND1),
+    say("Та не, я уже давно определился, хочу быть программистом.А у нас единственный специализированный ВУЗ где смогут нормально научить.Поэтому долго выбирать не пришлось.", CHR_FRIEND1),
 
     image(C_FRIEND2_1),
-    say("Не слушай его [возмущается], я тоже буду учится на программиста, но в инжеке – это раньше так ХНЭУ назывался.", CHR_FRIEND2),
+    say("Не слушай его, я тоже буду учится на программиста, но в инжеке – это раньше так ХНЭУ назывался.", CHR_FRIEND2),
     say("Мой брат заканчивал этот универ, факультет «Экономической информатики» и сейчас он за границей.", CHR_FRIEND2),
-    say("У них там вообще очень много фишек, одни из них, наверное самая классная, – французская программа двойного диплома, на магистратуре.", CHR_FRIEND2),
-
-    image(C_FRIEND3_1),
-    say("А я думаю, походу пойду в Мак работать, «Вільна каса, замовляйте будь ласка», у меня получается?", CHR_FRIEND3),
-    say("Кстатии, там как раз с ХНЭУ рядом. По дороге на занятия будете заходить в гости. *смеётся*", CHR_FRIEND3),
+    say("У них там вообще очень много фишек, одни из них, наверное самая классная\n, – французская программа двойного диплома, на магистратуре.", CHR_FRIEND2),
 
     image(C_YOU_1),
     say("Надо будет погуглить все эти фишки ХНЭУ, но походу я уже знаю куда буду поступать", CHR_YOU),
@@ -236,9 +231,8 @@ $game.dialog.setStage('act2-2', [
     image(C_YOU_3),
     say("До свидания!", CHR_YOU),
 
-    scene(SC_KHNUE2, "(По дороге к Александру Всеволодовичу)"),
+    scene(SC_DEKAN, "(По дороге к Александру Всеволодовичу)"),
 
-    image(null),
     say("[Ребята отправились на поиски кафедры. Оказалось, она была на 4 этаже главного корпуса, аудитория 413]"),
     say("[Но пока наши друзья ее нашли, они по ошибке зашли в деканат и познакомились с деканом]"),
 
@@ -371,7 +365,7 @@ $game.dialog.setStage('act3-2', [
 ]);
 
 $game.dialog.setStage('ending', [
-    scene(null, "(Заключение)"),
+    scene(SC_LAST, "(Заключение)"),
     action("show"),
 
     image(null),
