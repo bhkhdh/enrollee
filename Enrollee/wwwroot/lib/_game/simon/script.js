@@ -68,7 +68,7 @@ var simon = {
     }, 750));
   },
   play: function() {
-    if (this.sequenceLength == 20) {
+    if (this.sequenceLength == 10) {
       audioWin.play();
       this.gameOver(1); //won
     } else {
