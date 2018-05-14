@@ -1,0 +1,86 @@
+﻿
+@{
+    Layout = "_EmptyLayout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Oswald" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/lib/_game/simon/style.min.css">
+</head>
+
+<body>
+    <div class="container no-select">
+        <div class="text-xs-center">
+            <div class="h-100">
+                <div class="v-center">
+                    <h1 class="hidden-sm-up"><span class="too-small">Sorry, I'm not compatible on screens less than 544px wide!</span></h1>
+                    <div class="outer-circle hidden-xs-down">
+                        <div class="inner-circle">
+                        </div>
+                        <div class="inner-circle menu-circle">
+                            <h1 class="simon">SIMON</h1>
+                            <div class="m-menu">
+                                <div class="m-count">
+                                    <div class="count">- -</div>
+                                    <p>COUNT</p>
+                                </div>
+                                <div class="m-start">
+                                    <div class="but"></div>
+                                    <p>START</p>
+                                </div>
+                                <div class="m-strict">
+                                    <div class="but">
+                                        <div class="mini-but">
+                                        </div>
+                                    </div>
+                                    <p>STRICT</p>
+                                </div>
+                            </div>
+                            <div class="o-menu">
+                                OFF
+                                <div class="on-off">
+                                    <div class="but">
+                                    </div>
+                                </div>
+                                ON
+                            </div>
+                        </div>
+
+                        <div class="t">
+                            <div class="t-l">
+                            </div>
+                            <div class="sep">
+                            </div>
+                            <div class="t-r">
+                            </div>
+                        </div>
+                        <div class="b">
+                            <div class="b-l">
+                            </div>
+                            <div class="sep">
+                            </div>
+                            <div class="b-r">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.4/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+    <script src="~/lib/_game/simon/script.min.js"></script>
+</body>
+
+</html>

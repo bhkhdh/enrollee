@@ -1,0 +1,257 @@
+﻿@{
+    Layout = "_EmptyLayout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Path finder game</title>
+
+    <link rel="stylesheet" href="~/lib/_game/labyrinth/style.min.css">
+
+    <style>
+        path.clicked.wrong {
+            stroke: red;
+            stroke-width: 2;
+        }
+
+        path.clicked.correct {
+            stroke: green;
+            stroke-width: 3;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <div style="margin: 0% auto; margin-top: -90px; padding-left: 150px;">
+            <img class="star" id="star1" src="~/lib/_game/star-1.png">
+            <img class="star" id="star2" src="~/lib/_game/star-1.png">
+            <img class="star" id="star3" src="~/lib/_game/star-1.png">
+
+            <div class="doggy-container">
+                <div class="doggy doggy-sitting">
+                    <div class="dog-head-container look-left">
+                        <div class="dog-left-ear"></div>
+
+                        <div class="dog-head-2">
+                        </div>
+                        <div class="dog-head">
+                            <div class="dog-nose"></div>
+                        </div>
+                        <div class="dog-head-spot">
+                            <div class="dog-eye"></div>
+                        </div>
+                        <div class="dog-right-ear"></div>
+                    </div>
+                    <div class="dog-head-container look-right">
+                        <div class="dog-left-ear"></div>
+
+                        <div class="dog-head-2">
+                        </div>
+                        <div class="dog-head">
+                            <div class="dog-nose"></div>
+                        </div>
+                        <div class="dog-head-spot">
+                            <div class="dog-eye"></div>
+                        </div>
+                        <div class="dog-right-ear"></div>
+                    </div>
+                    <div class="collar">
+                        <div class="collar-shade"></div>
+                    </div>
+
+                    <div class="dog-torso">
+
+                        <div class="dog-torso-shade">
+                            <div class="light-right-dog-foot">
+                                <div class="swipes swipe-chest swipe-chest-light-right">
+                                    <div class="swipe-1-light-right grey-swipe"></div>
+                                    <div class="swipe-2-light-right grey-swipe"></div>
+                                </div>
+                            </div>
+                            <div class="light-right-dog-paw"></div>
+
+                        </div>
+
+                        <div class="left-dog-foot"></div>
+                        <div class="dog-torso-light">
+                            <div class="swipes swipe-chest swipe-chest-light">
+                                <div class="swipe-1-light grey-swipe"></div>
+                                <div class="swipe-2-light grey-swipe"></div>
+                            </div>
+                        </div>
+
+                        <div class="dog-torso-chest">
+                            <div class="swipes swipe-chest">
+                                <div class="swipe-1 grey-swipe"></div>
+                                <div class="swipe-2 grey-swipe"></div>
+                            </div>
+                        </div>
+
+                        <div class="right-dog-foot"></div>
+
+
+                    </div>
+
+                    <div class="doggy-cushion"></div>
+
+                </div>
+
+
+
+                <!-- Standing -->
+
+                <div class="doggy doggy-standing">
+                    <div class="dog-head-container look-left dog-head-standing-up">
+                        <div class="dog-left-ear dog-left-ear-standing"></div>
+
+                        <div class="dog-head-2">
+                        </div>
+                        <div class="dog-head">
+                            <div class="dog-nose"></div>
+                        </div>
+                        <div class="dog-head-spot dog-head-spot-standing">
+                            <div class="dog-eye"></div>
+                        </div>
+                        <div class="dog-right-ear dog-right-ear-standing"></div>
+                    </div>
+
+                    <div class="collar collar-standing-up">
+                        <div class="collar-shade"></div>
+                    </div>
+
+                    <div class="dog-torso dog-torso-standing-up">
+
+                        <div class="right-leg-standing"></div>
+                        <div class="right-hind-standing"></div>
+
+
+                        <div class="left-leg-standing">
+                            <div class="swipes swipe-chest swipe-chest-light-right swipe-chest-standing-2">
+                                <div class="swipe-1-light-right grey-swipe"></div>
+                                <div class="swipe-2-light-right grey-swipe"></div>
+                            </div>
+                        </div>
+                        <div class="left-hind-standing"></div>
+
+                        <div class="left-dog-foot left-dog-foot-standing"></div>
+
+                        <div class="dog-torso-chest dog-chesting-standing-up ">
+                            <div class="swipes swipe-chest">
+                                <div class="swipe-1 grey-swipe"></div>
+                                <div class="swipe-2 grey-swipe"></div>
+                            </div>
+                        </div>
+
+                        <div class="dog-torso-light-standing">
+                            <div class="swipes swipe-chest swipe-chest-light-right swipe-chest-standing-1">
+                                <div class="swipe-1-light-right grey-swipe"></div>
+                                <div class="swipe-2-light-right grey-swipe"></div>
+                            </div>
+                        </div>
+                        <div class="right-dog-foot right-dog-foot-standing"></div>
+                    </div>
+                    <div class="doggy-cushion doggy-cushion-standing"></div>
+                </div>
+
+
+
+                <!-- Jumping -->
+
+
+                <div class="doggy doggy-jumping">
+                    <div class="stars">
+                        <div class="circle-star circle-star-1"></div>
+                        <div class="circle-star circle-star-2"></div>
+                        <div class="circle-star circle-star-3"></div>
+                        <div class="circle-star circle-star-4"></div>
+
+                        <div class="diamond-star diamond-star-1"></div>
+                        <div class="diamond-star diamond-star-2"></div>
+                        <div class="diamond-star diamond-star-3"></div>
+
+                    </div>
+                    <div class="dog-head-container look-left dog-head-standing-up">
+                        <div class="dog-left-ear dog-left-ear-jumping"></div>
+
+                        <div class="dog-head-2">
+                        </div>
+                        <div class="dog-head">
+                            <div class="dog-nose"></div>
+                        </div>
+                        <div class="dog-head-spot dog-head-spot-standing">
+                            <div class="dog-eye"></div>
+                        </div>
+                        <div class="dog-right-ear dog-right-ear-jumping"></div>
+                    </div>
+
+                    <div class="collar collar-standing-up">
+                        <div class="collar-shade"></div>
+                    </div>
+
+                    <div class="dog-torso dog-torso-standing-up">
+
+                        <div class="right-leg-standing">
+                            <div class="swipes swipe-chest swipe-chest-light-right swipe-chest-jumping-1">
+                                <div class="swipe-1-light-right grey-swipe"></div>
+                                <div class="swipe-2-light-right grey-swipe"></div>
+                            </div>
+                        </div>
+                        <div class="right-hind-standing right-hind-jumping"></div>
+
+
+                        <div class="left-leg-standing left-leg-jumping "></div>
+                        <div class="left-hind-standing left-hind-jumping"></div>
+
+                        <div class="left-dog-foot left-dog-foot-jumping"></div>
+
+                        <div class="dog-torso-chest dog-chesting-standing-up ">
+                            <div class="swipes swipe-chest">
+                                <div class="swipe-1 grey-swipe"></div>
+                                <div class="swipe-2 grey-swipe"></div>
+                            </div>
+                        </div>
+
+                        <div class="dog-torso-light-standing">
+                            <div class="swipes swipe-chest swipe-chest-light-right swipe-chest-jumping-2">
+                                <div class="swipe-1-light-right grey-swipe"></div>
+                                <div class="swipe-2-light-right grey-swipe"></div>
+                            </div>
+                        </div>
+                        <div class="right-dog-foot right-dog-foot-jumping"></div>
+                    </div>
+                    <div class="doggy-cushion doggy-jumping-cushion"></div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+            <image id="boy-image" xlink:href="/lib/_game/labyrinth/img/boy.png" x="5" y="5" height="75px" width="75px" />
+            <g>
+                <path fill="transparent" stroke="#000" stroke-width="1.5" d="m88.5,26.4c93,4 113,8 136,32c23,24 48,46 33,80c-15,34 -24,39 -83,71c-59,32 -114,93 -58,97c56,4 64,24 104,-44c40,-68 116,-144 25,-130c-91,14 -125,0 -109,69c16,69 -5,94 103,89c108,-5 106,57 145,-60c39,-117 100,-193 8,-184c-92,9 -90,-4 -194,35c-104,39 -113,7 -115,108c-2,101 46,158 138,52c92,-106 30,-171 137,-159c107,12 122,-5 137,65c15,70 -11,39 -19,106c-8,67 -29,8 -57,83c-28,75 111,29 111,29"
+                      class="wrong" id="svg_4" />
+                <path fill="transparent" stroke="#000" stroke-width="1.5" stroke-opacity="null" d="m79.5,81.4c9,-6 37,7 42,39c5,32 -100,49 -42,104c58,55 64,66 84,111c20,45 6,64 72,28c66,-36 125,-127 106,-166c-19,-39 -72,-81 -65,-132c7,-51 52,-54 92,-53c40,1 92,9 96,36c4,27 21,42 3,93c-18,51 -35,83 -64,39c-29,-44 -43,-87 -3,-83c40,4 56,-3 42,37c-14,40 -50,66 -50,96c0,30 4,32 4,76c0,44 18,68 -34,67c-52,-1 -59,2 -59,-49c0,-51 5,-157 -23,-112c-28,45 -17,75 -65,114c-48,39 -84,52 -100,56c-16,4 -62,7 -79,-3"
+                      class="wrong" id="svg_5" />
+                <path fill="transparent" stroke="#000" stroke-width="1.5" stroke-opacity="null" d="m25.5,89.4c-5,66 -9,69 3,89c12,20 98,70 136,61c38,-9 211,-39 215,-61c4,-22 41,-104 -12,-106c-53,-2 -132,8 -178,30c-46,22 -77,4 -125,35c-48,31 -68,39 -60,73c8,34 34,65 82,104c48,39 213,-48 235,-80c22,-32 5,-34 27,-103c22,-69 36,-87 80,-97c44,-10 62,-9 29,108c-33,117 -56,136 -45,176c11,40 14,48 42,12c28,-36 59,-86 62,-100c3,-14 8,-60 3,-81c-5,-21 32,-39 -27,-67c-59,-28 -126,-55 -171,-55c-45,0 -57,-28 -121,15c-64,43 -82,94 -82,139c0,45 44,163 113,165c69,2 80,6 97,0c17,-6 94,-39 114,-72c20,-33 58,-114 62,-138c4,-24 30,-82 30,-82"
+                      class="correct" id="svg_9" />
+                <ellipse id="butt1" ry="7" rx="7" cy="88.4" cx="24.5" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="#ff0f4b" />
+                <ellipse id="butt2" ry="7" rx="7" cy="81.4" cx="78.5" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="#0fff13" />
+                <ellipse id="butt3" ry="7" rx="7" cy="25.4" cx="86.5" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="#0f23ff" />
+            </g>
+            <image xlink:href="/lib/_game/labyrinth/img/KhNUE.png" x="83%" y="5" height="80px" width="80px" />
+            <image xlink:href="/lib/_game/labyrinth/img/trash.png" x="83%" y="79%" height="70px" width="70px" />
+            <image xlink:href="/lib/_game/labyrinth/img/cafe.png" x="4%" y="79%" height="70px" width="70px" />
+        </svg>
+    </div>
+
+
+    <script src="~/lib/_game/labyrinth/script.min.js"></script>
+</body>
+
+</html>

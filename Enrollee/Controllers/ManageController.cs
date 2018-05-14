@@ -492,6 +492,18 @@ namespace Enrollee.Controllers
             return View(nameof(ShowRecoveryCodes), model);
         }
 
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateSaveData(string data) {
+            var user = await _userManager.GetUserAsync(User);
+
+            user.SaveData = data;
+            await _userManager.UpdateAsync(user);
+
+            return Json(null);
+        }
+
         #region Helpers
 
         private void AddErrors(IdentityResult result)

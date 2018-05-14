@@ -4,9 +4,7 @@
     "inputFiles": [
       "wwwroot/css/game.css",
       "wwwroot/css/site.css"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
   },
   {
     "outputFileName": "wwwroot/js/bundle.js",
@@ -14,8 +12,48 @@
       "wwwroot/js/comments.js",
       "wwwroot/js/game.js",
       "wwwroot/js/site.js"
-    ],
-    "sourceMap": false,
-    "sourceMapRootPath": null
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/game-script.min.js",
+    "inputFiles": [
+      "wwwroot/js/game-script.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/_game/wordfind/wordfind.min.css",
+    "inputFiles": [
+      "wwwroot/lib/_game/wordfind/wordfind.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/_game/wordfind/wordfind.min.js",
+    "inputFiles": [
+      "wwwroot/lib/_game/wordfind/wordfind.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/_game/labyrinth/script.min.js",
+    "inputFiles": [
+      "wwwroot/lib/_game/labyrinth/script.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/_game/labyrinth/style.min.css",
+    "inputFiles": [
+      "wwwroot/lib/_game/labyrinth/style.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/_game/simon/script.min.js",
+    "inputFiles": [
+      "wwwroot/lib/_game/simon/script.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/_game/simon/style.min.css",
+    "inputFiles": [
+      "wwwroot/lib/_game/simon/style.css"
+    ]
   }
 ]

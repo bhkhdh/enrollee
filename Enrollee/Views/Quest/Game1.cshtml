@@ -1,5 +1,103 @@
-﻿@{ 
+﻿@{
     Layout = "_EmptyLayout";
 }
 
-<h1>Hello</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Word Find</title>
+    <link rel="stylesheet" type="text/css" href="~/lib/_game/wordfind/wordfind.min.css">
+</head>
+
+<body>
+    <h1>
+        Найди слова (найдено:
+        <span id="counter">0</span>/9)
+    </h1>
+    <div style="margin: 0% auto; text-align: center;">
+        <img class="star" id="star1" src="~/lib/_game/star-1.png">
+        <img class="star" id="star2" src="~/lib/_game/star-1.png">
+        <img class="star" id="star3" src="~/lib/_game/star-1.png">
+    </div>
+
+    </div>
+    <div id="main" role="main">
+        <div id="puzzle"></div>
+        <ul id="words"></ul>
+    </div>
+    <!--
+    <button onclick="window.game.solve()">solve</button>
+    -->
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/_game/wordfind/wordfind.min.js"></script>
+    <script>
+        /* Example words setup */
+        var words = [
+            'хнэу',
+            'программа',
+            'код',
+            'абитуриент',
+            'учёба',
+            'студент',
+            'экзамен',
+            'знания',
+            'оценка',
+        ];
+
+        var score = 1;
+
+        function updateStars() {
+            if (score > 1)
+                $("#star2").show("slow");
+            if (score > 2)
+                $("#star3").show("slow");
+        }
+
+        $("#star2").hide();
+        $("#star3").hide();
+        updateStars();
+
+        var wordsFound = 0;
+        words.map(function (word) {
+            WordFindGame.append($('ul#words'), word)
+        });
+
+        /* Init */
+        function recreate() {
+            wordsFound = 0;
+            $('#result-message').removeClass();
+            var game;
+            try {
+                game = new WordFindGame('#puzzle', {
+                    allowedMissingWords: 0,
+                    maxGridGrowth: 5,
+                    fillBlanks: undefined,
+                    allowExtraBlanks: 0,
+                    maxAttempts: 100,
+                });
+            } catch (error) { }
+            //wordfind.print(game);
+            game.wordFound = (word) => {
+                if (++wordsFound > 5) {
+                    score = 2;
+                }
+                if (wordsFound >= 9) {
+                    score = 3;
+                }
+                updateStars();
+                if (word)
+                    $("#counter").text(wordsFound)
+            };
+            window.game = game;
+        }
+
+        recreate();
+    </script>
+</body>
+
+</html>

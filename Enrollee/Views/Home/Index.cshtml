@@ -36,40 +36,7 @@
 }
 
 @section Scripts {
-    <link rel="preload" href="~/images/game/map-full.png" as="image" />
-
-    <script type="text/javascript">
-        // Hardcoded test, remove later
-
-        $game.dialog.setStage('intro', [
-            { do: "scene", url: "/images/game/scene/scene-1.png" },
-            { do: "action", name: "show" },
-
-            { do: "say", text: "This is some intro text" },
-            { do: "say", text: "More text here" },
-
-            { do: "goto", stage: "test-1" },
-        ]);
-
-
-        $game.dialog.setStage('test-1', [
-            { do: "scene", url: "/images/game/scene/scene-2.png", text: "[memes]" },
-
-            { do: "image", url: "/images/game/dialog/person-1.png" },
-            { do: "say", name: "Person", text: "Hello!" },
-            { do: "say", name: "Person", text: "Here should be some content" },
-
-            { do: "image", url: null },
-            { do: "say", text: "The End™" },
-
-            { do: "action", name: "hide" },
-            { do: "scene", url: null },
-
-            { do: "action", name: "ChapterDone" },
-        ]);
-
-        $game.map.addArea('test', [25.5, 5.5, 28.0, 17.6], "Testing", [
-            { name: "Start Dialog", dialog: "intro" },
-        ]);
-    </script>
+    @if(User.Identity.IsAuthenticated) {
+        @await Html.PartialAsync("GameScriptPartial")
+    }
 }
