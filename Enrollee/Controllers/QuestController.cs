@@ -22,5 +22,9 @@ namespace Enrollee.Controllers
         public IActionResult Game4() {
             return View();
         }
+
+        public IActionResult Certificate() {
+            return View();
+        }
     }
 }

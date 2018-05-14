@@ -34,7 +34,7 @@ var SC_PARK = "/images/game/scene/park.png";
 var SC_KHNUE1 = "/images/game/scene/khnue1.png";
 var SC_KHNUE2 = "/images/game/scene/khnue2.png";
 var SC_KHNUE3 = "/images/game/scene/khnue3.png";
-var SC_LECTURE = null; // ** NO IMAGE!
+var SC_LECTURE = "/images/game/scene/lecture.png"
 
 var I_DOCUMENTS = "/images/game/misc/documents.png";
 
@@ -331,7 +331,7 @@ $game.dialog.setStage('act3-1', [
 ]);
 
 $game.dialog.setStage('act3-2', [
-    scene(SC_LECTURE, "(Лабораторная по программированию)"),
+    scene(SC_LECTURE, "(Занятие по программированию)"),
     action("show"),
 
     image(C_PROFESSOR_1),
@@ -372,11 +372,12 @@ $game.dialog.setStage('act3-2', [
 
 $game.dialog.setStage('ending', [
     scene(null, "(Заключение)"),
+    action("show"),
 
     image(null),
     say("А ты готов начать свое знакомство с программированием именно в нашем Харьковском национальном экономическом университете имени Семена Кузнеца? Ждем тебя!"),
 
-    action("OverlayCertificate"),
+    action("StartQuest", ["/Quest/Certificate"]),
     action("ChapterDone", ["act3", null]),
 ]);
 
