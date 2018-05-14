@@ -32,19 +32,22 @@
 
     <canvas id="canvashid" width="2560" height="1600" hidden></canvas>
 
-    <img id="display" width="100%" height="90%" style="margin: 0 auto; display: block;object-fit: contain;" />
     <a id="download" download="Сертификат.png" />
     <button>Сохранить себе</button>
+    <img id="display" width="100%" height="90%" style="margin: 0 auto; display: block;object-fit: contain;" />
 
-    @if(User.Identity.IsAuthenticated) {
+    @if (User.Identity.IsAuthenticated)
+    {
         <script>
-            @{ 
+            @{
                 var username = User.Claims.FirstOrDefault(v => v.Type == ClaimTypes.GivenName).Value;
                 username = username.Replace("\\", "\\\\").Replace("\"", "\\\"");
             }
             var USERNAME = "@username";
         </script>
-    } else {
+    }
+    else
+    {
         <script>
             var USERNAME = "Хакер";
         </script>
