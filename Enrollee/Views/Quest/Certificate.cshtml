@@ -43,7 +43,7 @@
                 var username = User.Claims.FirstOrDefault(v => v.Type == ClaimTypes.GivenName).Value;
                 username = username.Replace("\\", "\\\\").Replace("\"", "\\\"");
             }
-            var USERNAME = "@username";
+            var USERNAME = "@Html.Raw(username)";
         </script>
     }
     else
