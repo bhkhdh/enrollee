@@ -364,6 +364,8 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
                     } else {
                         var def = $U.always({ self: this, url: newUrl });
 
+                        $game.busy = true;
+
                         if (oldUrl != BLANK_IMG) {
                             def = def.then(function (p) {
                                 DG_IMAGE.addClass('dg-hidden');
@@ -384,12 +386,13 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
                             p.self.advance();
                         });
 
-                        $game.busy = true;
                         break _loop;
                     }
 
                 case "scene":
                     var def = $U.always({ url: cmd.url, text: cmd.text, self: this });
+
+                    $game.busy = true;
 
                     def = def.then(function (p) {
                         DG_FADETXT.html(p.text || null);
@@ -408,11 +411,11 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
                         $U.setBgImage(DG_SCENE, p.url);
                         return $U.delay(500, p);
                     }).then(function (p) {
+                        console.log("$game", $game);
                         $game.busy = false;
                         p.self.advance();
                     });
 
-                    $game.busy = true;
                     break _loop;
 
                 case "goto":
