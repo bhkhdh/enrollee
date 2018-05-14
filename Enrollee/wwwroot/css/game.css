@@ -12,6 +12,14 @@
     height: 100%;
 }
 
+.dialog-overlay {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+}
+
     /*.game-welcome .play-btn {
         position: absolute;
         top: 50%;

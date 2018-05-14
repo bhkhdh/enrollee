@@ -3,7 +3,7 @@
     var MN_NEWGAME, MN_SAVEGAME;
     var GM_WELCOME, GM_PLAYBTN;
     var MAP_BODY, MAP_IMAGE, MAP_CHP_MENU, MAP_CHP_LIST;
-    var BLANK_IMG, DG_TEXT, DG_NAME, DG_IMAGE, DG_SCENE, DG_FADE, DG_FADETXT, DG_DIALOG, DG_NEXTBTN;
+    var BLANK_IMG, DG_TEXT, DG_NAME, DG_IMAGE, DG_SCENE, DG_OVERLAY, DG_FADE, DG_FADETXT, DG_DIALOG, DG_NEXTBTN;
     var QST_IFRAME, QST_LOADING;
 
     // Game system core
@@ -250,6 +250,7 @@
 
             image: DG_IMAGE.attr('src'),
             scene: $U.getBgImage(DG_SCENE),
+            overlay: $U.getBgImage(DG_OVERLAY),
             text: DG_TEXT.html(),
             name: DG_NAME.html(),
         };
@@ -267,6 +268,7 @@
         }
 
         $U.setBgImage(DG_SCENE, data.scene);
+        $U.setBgImage(DG_OVERLAY, data.overlay);
 
         DG_TEXT.html(data.text);
 
@@ -315,6 +317,7 @@
                         DG_NAME.html(cmd.name);
                     } else {
                         DG_NAME.css('display', 'none');
+                        DG_NAME.html(null);
                     }
                     break _loop;
 
@@ -344,6 +347,11 @@
                                 DG_IMAGE.attr('src', p.url);
                                 DG_IMAGE.removeClass('dg-hidden');
                                 return $U.delay(500, p);
+                            });
+                        } else {
+                            def = def.then(function (p) {
+                                DG_IMAGE.attr('src', BLANK_IMG);
+                                return $U.always(p);
                             });
                         }
 
@@ -377,7 +385,6 @@
                         $U.setBgImage(DG_SCENE, p.url);
                         return $U.delay(500, p);
                     }).then(function (p) {
-                        console.log("$game", $game);
                         $game.busy = false;
                         p.self.advance();
                     });
@@ -442,6 +449,10 @@
         DG_SCENE.css('display', show ? '' : 'none');
     };
 
+    dialog.overlay = function (url) {
+        $U.setBgImage(DG_OVERLAY, url || null);
+    }
+
     // Default dialog actions
 
     dialog.setAction("show", function () {
@@ -450,6 +461,10 @@
 
     dialog.setAction("hide", function () {
         this.dialog.show(false);
+    });
+
+    dialog.setAction("Overlay", function (url) {
+        this.dialog.overlay(url);
     });
 
     dialog.setAction("ChapterDone", function (prev, next) {
@@ -543,6 +558,7 @@
 
         DG_IMAGE = $(".dg-image img");
         DG_SCENE = $(".dialog-scene");
+        DG_OVERLAY = $(".dialog-overlay");
 
         DG_FADE = $(".dialog-fade");
         DG_FADETXT = $(".dialog-fade .fade-text");
