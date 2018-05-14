@@ -238,7 +238,7 @@
 
 .play-btn .stroke-dotted {
     opacity: 0;
-    stroke-dasharray: 4, 5;
+    stroke-dasharray: 8 7;
     stroke-width: 1.5px;
     transform-origin: 50% 50%;
     animation: spin 4s infinite linear;
@@ -290,6 +290,11 @@ body {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.copyright{
+    text-align:left;
+    margin-top:50px;
 }
 
 .video-wrapper {
