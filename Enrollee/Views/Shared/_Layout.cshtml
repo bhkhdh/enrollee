@@ -65,6 +65,7 @@
                     <li><a asp-controller="Home" asp-action="Index">Главная</a></li>
                     <li><a asp-controller="Home" asp-action="About">О Нас</a></li>
                     <li><a asp-controller="Home" asp-action="Contact">Контакты</a></li>
+                    <li @if (User.Identity.Name != "admin@admin.admin") { <text> style="display:none;" </text> }><a asp-controller="Home" asp-action="Admin">Админпанель</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
