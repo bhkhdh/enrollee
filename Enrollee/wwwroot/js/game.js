@@ -173,7 +173,7 @@
                 dom.css('left', area.pos[0] + '%');
                 dom.css('top', area.pos[1] + '%');
                 dom.css('width', area.pos[2] + '%');
-                dom.css('height', area.pos[3] + '%');
+                dom.css('height', area.pos[] + '%');
                 
                 dom.click(this._showChapterMenu.bind(this, area));
             }
@@ -331,7 +331,7 @@
                         DG_IMAGE.attr('src', newUrl);
                         break;
                     } else {
-                        var def = $U.always({ self: this, url: newUrl });
+                        var def = $U.always({ url: newUrl });
 
                         $game.busy = true;
 
@@ -357,14 +357,14 @@
 
                         def.then(function (p) {
                             $game.busy = false;
-                            p.self.advance();
+                            $game.dialog.advance();
                         });
 
                         break _loop;
                     }
 
                 case "scene":
-                    var def = $U.always({ url: cmd.url, text: cmd.text, self: this });
+                    var def = $U.always({ url: cmd.url, text: cmd.text });
 
                     $game.busy = true;
 
@@ -386,7 +386,7 @@
                         return $U.delay(500, p);
                     }).then(function (p) {
                         $game.busy = false;
-                        p.self.advance();
+                        $game.dialog.advance();
                     });
 
                     break _loop;

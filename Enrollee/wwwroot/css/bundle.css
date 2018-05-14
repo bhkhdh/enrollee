@@ -50,6 +50,11 @@
         font-size: 1.5em;
 
         padding-right: 50px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     @media all and (min-width: 1000px) {
@@ -197,15 +202,16 @@
 }
 
     .ch-list > .chapter {
-        width: 30%;
+        width: 25%;
         padding: 10px;
         text-align: center;
     }
 
-        .ch-list > .chapter > .cc-img {
-            width: 100%;
-            cursor: pointer;
-        }
+    .ch-list > .chapter > .cc-img {
+        width: 100%;
+        cursor: pointer;
+    }
+
 #map-chapter-menu .ch-title {
     font-style: italic;
 }
