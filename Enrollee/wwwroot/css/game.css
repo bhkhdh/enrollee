@@ -238,7 +238,7 @@
 
 .play-btn .stroke-dotted {
     opacity: 0;
-    stroke-dasharray: 4, 5;
+    stroke-dasharray: 8 7;
     stroke-width: 1.5px;
     transform-origin: 50% 50%;
     animation: spin 4s infinite linear;
