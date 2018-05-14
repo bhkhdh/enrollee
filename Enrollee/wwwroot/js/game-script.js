@@ -272,7 +272,7 @@ $game.dialog.setStage('act2-2', [
 
 $game.dialog.setStage('act3-1', [
     scene(SC_KHNUE3, "(Аудитория 411)"),
-    action("show", true),
+    action("show"),
 
     image(C_YOU_3),
     say("Здравствуйте, а мы должны у вас пройти собеседование?", CHR_YOU),
@@ -350,7 +350,7 @@ $game.dialog.setStage('act3-2', [
     say("Вау, у нас получилось, немного до 100 процентов не хватило.", CHR_FRIEND2),
 
     image(C_YOU_3),
-    say("Да, мне очень понравилось, давай дальше решать."),
+    say("Да, мне очень понравилось, давай дальше решать.", CHR_YOU),
 
     image(null),
     say("[Подходит преподаватель]"),
@@ -382,7 +382,7 @@ $game.dialog.setStage('ending', [
 ]);
 
 
-$game.map.addArea('act1', [25.5, 5.4, 28.0, 17.8], "Дома", [
+$game.map.addArea('act1', [25.5, 5.4, 28.0, 17.8], "Домашние приключения", [
     { name: "Вступление 1", dialog: "intro-1" },
     { name: "Вступление 2", dialog: "intro-2" },
 
@@ -390,12 +390,12 @@ $game.map.addArea('act1', [25.5, 5.4, 28.0, 17.8], "Дома", [
     { name: "Часть 2", dialog: "act1-2" },
 ]);
 
-$game.map.addArea('act2', [41.6, 33.0, 21.0, 24.0], "Приёмная комиссия", [
+$game.map.addArea('act2', [41.6, 33.0, 21.0, 24.0], "Путь сквозь тернии к звездам", [
     { name: "Часть 3", dialog: "act2-1" },
     { name: "Часть 4", dialog: "act2-2" },
 ]);
 
-$game.map.addArea('act3', [36.0, 64.0, 38.5, 27.2], "Университет", [
+$game.map.addArea('act3', [36.0, 64.0, 38.5, 27.2], "Gaudeāmus igĭtur", [
     { name: "Часть 5", dialog: "act3-1" },
     { name: "Часть 6", dialog: "act3-2" },
 
