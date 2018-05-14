@@ -10,13 +10,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Word Find</title>
-    <link rel="stylesheet" type="text/css" href="~/lib/_game/wordfind/wordfind.min.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/_game/wordfind/wordfind.min.css" asp-append-version="true">
 </head>
 
 <body>
     <h1>
-        Найди слова (найдено:
-        <span id="counter">0</span>/9)
+        Найди слова (найдено:<span id="counter">0</span>/9)
+
+        <button type="button" onclick="window.game.solve()">
+            Завершить
+        </button>
     </h1>
     <div style="margin: 0% auto; text-align: center;">
         <img class="star" id="star1" src="~/lib/_game/star-1.png">
@@ -29,12 +32,9 @@
         <div id="puzzle"></div>
         <ul id="words"></ul>
     </div>
-    <!--
-    <button onclick="window.game.solve()">solve</button>
-    -->
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="~/lib/_game/wordfind/wordfind.min.js"></script>
+    <script type="text/javascript" src="~/lib/_game/wordfind/wordfind.min.js" asp-append-version="true"></script>
     <script>
         /* Example words setup */
         var words = [

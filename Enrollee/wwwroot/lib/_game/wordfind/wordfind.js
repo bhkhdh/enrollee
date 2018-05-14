@@ -839,6 +839,9 @@
          * @param {[[String]]} puzzle: The puzzle to solve
          */
         this.solve = function () {
+            if (this._solved) return;
+            this._solved = true;
+
             var solution = wordfind.solve(puzzle, wordList).found;
 
             for (var i = 0, len = solution.length; i < len; i++) {
@@ -858,6 +861,10 @@
                     wordEl.addClass('wordFound');
                 }
             }
+
+            setTimeout(function () {
+                window.parent.postMessage('quest-ok', '*');
+            }, 2000);
         };
     };
 
