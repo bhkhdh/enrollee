@@ -32,7 +32,8 @@ var SC_KHNUE1 = "/images/game/scene/khnue1.png";
 var SC_KHNUE2 = "/images/game/scene/khnue2.png";
 var SC_KHNUE3 = "/images/game/scene/khnue3.png";
 var SC_DEKAN = "/images/game/scene/dekan.png";
-var SC_LECTURE = "/images/game/scene/lecture.png"
+var SC_LECTURE = "/images/game/scene/lecture.png";
+var SC_LAST = "/images/KhNUE.jpg";
 
 var I_DOCUMENTS = "/images/game/misc/documents.png";
 
@@ -230,9 +231,8 @@ $game.dialog.setStage('act2-2', [
     image(C_YOU_3),
     say("До свидания!", CHR_YOU),
 
-    scene(SC_KHNUE2, "(По дороге к Александру Всеволодовичу)"),
+    scene(SC_DEKAN, "(По дороге к Александру Всеволодовичу)"),
 
-    image(SC_DEKAN),//tofix
     say("[Ребята отправились на поиски кафедры. Оказалось, она была на 4 этаже главного корпуса, аудитория 413]"),
     say("[Но пока наши друзья ее нашли, они по ошибке зашли в деканат и познакомились с деканом]"),
 
@@ -365,7 +365,7 @@ $game.dialog.setStage('act3-2', [
 ]);
 
 $game.dialog.setStage('ending', [
-    scene(null, "(Заключение)"),
+    scene(SC_LAST, "(Заключение)"),
     action("show"),
 
     image(null),
