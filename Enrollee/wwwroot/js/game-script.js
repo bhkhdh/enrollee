@@ -31,8 +31,8 @@ var C_PROFESSOR_1 = "/images/game/dialog/professor1-1.png";
 
 var SC_HOME = "/images/game/scene/home.png";
 var SC_PARK = "/images/game/scene/park.png";
-var SC_KHNUE1 = null; // ** NO IMAGE!
-var SC_KHNUE2 = null; // ** NO IMAGE!
+var SC_KHNUE1 = "/images/game/scene/khnue1.png";
+var SC_KHNUE2 = "/images/game/scene/khnue2.png";
 var SC_KHNUE3 = "/images/game/scene/khnue3.png";
 var SC_LECTURE = null; // ** NO IMAGE!
 
@@ -203,6 +203,8 @@ $game.dialog.setStage('act2-1', [
     image(null),
     say("[Пока все не понимали что происходит, Джей уже вернулся и они с Сашей зашли в кабинет]"),
 
+    scene(SC_KHNUE2),
+
     image(C_WOMAN1_2),
     say("Спасибо большое, ты меня спас! *радуется* Давайте свои документы.", CHR_WOMAN1),
     say("Молодцы, ничего не забыли, но у меня будет к вам еще задание", CHR_WOMAN1),
@@ -220,7 +222,7 @@ $game.dialog.setStage('act2-1', [
 ]);
 
 $game.dialog.setStage('act2-2', [
-    scene(SC_KHNUE1, "(Через некоторое время…)"),
+    scene(SC_KHNUE2, "(Через некоторое время…)"),
     action("show"),
 
     image(C_WOMAN1_3),
