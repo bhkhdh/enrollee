@@ -12,6 +12,11 @@ body {
     padding-right: 15px;
 }
 
+.copyright{
+    text-align:left;
+    margin-top:50px;
+}
+
 .video-wrapper {
     margin: auto;
     display: block;
@@ -155,6 +160,7 @@ div.has-bg {
     height: 40px;
     text-align: center;
     font-size: 10px;
+    color: white;
 }
 
     .spinner > div {

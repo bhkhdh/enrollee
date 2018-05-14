@@ -34,10 +34,10 @@ $(document).ready(function () {
 $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
 (function () {
 
-    var MN_NEWGAME;
+    var MN_NEWGAME, MN_SAVEGAME;
     var GM_WELCOME, GM_PLAYBTN;
     var MAP_BODY, MAP_IMAGE, MAP_CHP_MENU, MAP_CHP_LIST;
-    var BLANK_IMG, DG_TEXT, DG_NAME, DG_IMAGE, DG_SCENE, DG_FADE, DG_FADETXT, DG_DIALOG, DG_NEXTBTN;
+    var BLANK_IMG, DG_TEXT, DG_NAME, DG_IMAGE, DG_SCENE, DG_OVERLAY, DG_FADE, DG_FADETXT, DG_DIALOG, DG_NEXTBTN;
     var QST_IFRAME, QST_LOADING;
 
     // Game system core
@@ -59,32 +59,64 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
     $game.save = function () {
         return {
             mode: this._mode,
+
             map: this.map.save(),
             dialog: this.dialog.save(),
+            quest: this.quest.save(),
         };
     };
 
     $game.load = function (data) {
+        if (!data) return;
+
         this.mode(data.mode);
 
         this.map.load(data.map);
         this.dialog.load(data.dialog);
+        this.quest.load(data.quest);
+
+        this.mode(data.mode);
     };
 
-    $game.mode = function (name, a1, a2, a3) {
+    $game.serverSave = function (erase) {
+        var data = erase ? "" : JSON.stringify(this.save());
+
+        $("#game-save-data").text(data);
+
+        $.ajax({
+            method: 'post',
+            url: '/Manage/UpdateSaveData',
+            data: { data: data },
+        });
+    };
+
+    $game.serverLoad = function () {
+        var data = $("#game-save-data").text();
+
+        if (data.length > 0) {
+            console.log("load now");
+            this.load(JSON.parse(data));
+        }
+    }
+
+    $game.mode = function (name, arg) {
         if (this.busy) return;
 
         switch (name) {
             case "dialog":
                 this.map.show(false);
-                this.quest.show(null);
+                this.quest.begin(null);
                 this._showWelcome(false);
 
-                this.dialog.goto(null, a1);
+                if (arg !== undefined) {
+                    this.dialog.goto(null, arg);
+                } else {
+                    this.dialog.show(true);
+                }
                 break;
             case "map":
                 this.dialog.show(false);
-                this.quest.show(null);
+                this.quest.begin(null);
                 this._showWelcome(false);
 
                 this.map.show(true);
@@ -92,7 +124,7 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
             case "welcome":
                 this.map.show(false);
                 this.dialog.show(false);
-                this.quest.show(null);
+                this.quest.begin(null);
 
                 this._showWelcome(true);
                 break;
@@ -101,7 +133,11 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
                 this.dialog.show(false);
                 this._showWelcome(false);
 
-                this.quest.show(a1);
+                if (arg !== undefined) {
+                    this.quest.begin(arg);
+                } else {
+                    this.quest.show(true);
+                }
                 break;
             default:
                 console.error("Invalid mode '" + name + "'");
@@ -119,16 +155,23 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
 
     var map = $game.map = {
         _areas: {},
+        _blocked: {},
     };
 
     map.save = function () {
         return {
-
+            blocked: $.extend({}, this._blocked),
         };
     };
 
     map.load = function (data) {
+        this._blocked = $.extend({}, data.blocked);
 
+        for (var k in this._areas) {
+            if (!this._areas.hasOwnProperty(k)) continue;
+
+            this.setBlocked(k, this._blocked[k]);
+        }
     };
 
     map.addArea = function (name, pos, title, menu) {
@@ -138,6 +181,8 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
             title: title,
             menu: menu.slice(),
         };
+
+        this._blocked[name] = true;
     };
 
     map.show = function (show) {
@@ -155,6 +200,10 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
                 var dom = area.elem = $(item_tpl);
                 dom.appendTo(MAP_BODY);
 
+                if (this._blocked[area.name]) {
+                    dom.addClass('blocked');
+                }
+
                 dom.css('left', area.pos[0] + '%');
                 dom.css('top', area.pos[1] + '%');
                 dom.css('width', area.pos[2] + '%');
@@ -167,7 +216,22 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
         MAP_BODY.css('display', show ? '' : 'none');
     };
 
+    map.setBlocked = function (area, block) {
+        var _area = this._areas[area];
+        if (!_area) {
+            console.error("Invalid map area '" + area + "'");
+            return;
+        }
+
+        this._blocked[area] = !!block;
+        if (_area.elem) {
+            _area.elem.toggleClass('blocked', block);
+        }
+    }
+
     map._showChapterMenu = function (data) {
+        if (this._blocked[data.name]) return;
+
         var item_tpl = $("#map-chapter-menu-tpl").html();
 
         MAP_CHP_LIST.html(null);
@@ -216,10 +280,11 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
     dialog.save = function () {
         return {
             index: this._index,
-            stage: this._stage.name,
+            stage: this._stage ? this._stage.name : null,
 
             image: DG_IMAGE.attr('src'),
             scene: $U.getBgImage(DG_SCENE),
+            overlay: $U.getBgImage(DG_OVERLAY),
             text: DG_TEXT.html(),
             name: DG_NAME.html(),
         };
@@ -237,6 +302,7 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
         }
 
         $U.setBgImage(DG_SCENE, data.scene);
+        $U.setBgImage(DG_OVERLAY, data.overlay);
 
         DG_TEXT.html(data.text);
 
@@ -285,6 +351,7 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
                         DG_NAME.html(cmd.name);
                     } else {
                         DG_NAME.css('display', 'none');
+                        DG_NAME.html(null);
                     }
                     break _loop;
 
@@ -300,6 +367,8 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
                     } else {
                         var def = $U.always({ self: this, url: newUrl });
 
+                        $game.busy = true;
+
                         if (oldUrl != BLANK_IMG) {
                             def = def.then(function (p) {
                                 DG_IMAGE.addClass('dg-hidden');
@@ -313,6 +382,11 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
                                 DG_IMAGE.removeClass('dg-hidden');
                                 return $U.delay(500, p);
                             });
+                        } else {
+                            def = def.then(function (p) {
+                                DG_IMAGE.attr('src', BLANK_IMG);
+                                return $U.always(p);
+                            });
                         }
 
                         def.then(function (p) {
@@ -320,12 +394,13 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
                             p.self.advance();
                         });
 
-                        $game.busy = true;
                         break _loop;
                     }
 
                 case "scene":
                     var def = $U.always({ url: cmd.url, text: cmd.text, self: this });
+
+                    $game.busy = true;
 
                     def = def.then(function (p) {
                         DG_FADETXT.html(p.text || null);
@@ -348,7 +423,6 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
                         p.self.advance();
                     });
 
-                    $game.busy = true;
                     break _loop;
 
                 case "goto":
@@ -359,10 +433,11 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
                     var data;
                     
                     if (data = this._actions[cmd.name]) {
-                        data.apply($game, cmd.args);
+                        if (data.apply($game, cmd.args)) break _loop;
                     } else if(cmd.name) {
                         console.error("Invalid action '" + cmd.name + "'");
                     }
+                    
                     break;
             }
         }
@@ -408,6 +483,10 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
         DG_SCENE.css('display', show ? '' : 'none');
     };
 
+    dialog.overlay = function (url) {
+        $U.setBgImage(DG_OVERLAY, url || null);
+    }
+
     // Default dialog actions
 
     dialog.setAction("show", function () {
@@ -418,38 +497,64 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
         this.dialog.show(false);
     });
 
-    dialog.setAction("ChapterDone", function () {
+    dialog.setAction("Overlay", function (url) {
+        this.dialog.overlay(url);
+    });
+
+    dialog.setAction("ChapterDone", function (prev, next) {
+        if (next) {
+            this.map.setBlocked(next, false);
+        }
+
         this.mode("map");
+    });
+
+    dialog.setAction("StartQuest", function (url) {
+        this.mode("quest", url);
+        return true;
     });
 
     // Quest system
 
     var quest = $game.quest = {
         _isload: false,
+
+        _url: null,
     };
 
     quest.save = function () {
         return {
-
+            url: this._url,
         };
     };
 
     quest.load = function (data) {
-
+        this.begin(data.url);
     };
 
-    quest.show = function (url) {
+    quest.begin = function (url) {
+        if ($game.busy) return;
+
         if (url) {
             $game.busy = true;
             this._isload = true;
+            this._url = url;
 
             QST_IFRAME.attr('src', url);
             QST_LOADING.css('display', '');
         } else {
+            this._url = null;
+
             QST_IFRAME.attr('src', 'about:blank');
             QST_IFRAME.css('display', 'none');
             QST_LOADING.css('display', 'none');
         }
+    };
+
+    quest.show = function (show) {
+        if (!this._url || $game.busy) return;
+
+        QST_IFRAME.css('display', show ? '' : 'none');
     };
 
     quest._onLoad = function () {
@@ -460,7 +565,16 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
             QST_IFRAME.css('display', '');
             QST_LOADING.css('display', 'none');
         }
-    }
+    };
+
+    quest._onMessage = function (data) {
+        switch (data) {
+            case "quest-ok":
+                $game.mode("dialog");
+                $game.dialog.advance();
+                break;
+        }
+    };
 
     // Setup code
 
@@ -468,6 +582,7 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
         // Element references
 
         MN_NEWGAME = $("a.newgame-btn");
+        MN_SAVEGAME = $("a.savegame-btn");
 
         GM_WELCOME = $(".game-welcome");
         GM_PLAYBTN = $(".game-welcome .play-btn");
@@ -477,6 +592,7 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
 
         DG_IMAGE = $(".dg-image img");
         DG_SCENE = $(".dialog-scene");
+        DG_OVERLAY = $(".dialog-overlay");
 
         DG_FADE = $(".dialog-fade");
         DG_FADETXT = $(".dialog-fade .fade-text");
@@ -508,16 +624,35 @@ $('#CommentListSegment').on('click', '.SwitchPageBtn', getComments);
             $game.quest._onLoad();
         });
 
+        $(window).on('message', function (e) {
+            var data = e.originalEvent.data;
+            $game.quest._onMessage(data);
+        });
+
         // Base setup
 
         GM_PLAYBTN.click(function () {
-            $game.new();
+            var saved = $("#game-save-data").text();
+
+            if (saved.length > 0
+            && confirm("Загрузить ранее сохранённый прогресс?")) {
+                $game.serverLoad();
+            } else {
+                $game.new();
+                $game.serverSave(true);
+            }
         });
 
         MN_NEWGAME.click(function () {
             if (confirm("Действительно начать игру заново?")) {
                 $game.reset();
+                $game.serverSave(true);
             }
+        });
+
+        MN_SAVEGAME.click(function () {
+            $game.serverSave(false);
+            alert("Ваш игровой прогресс сохранён!");
         });
     });
 

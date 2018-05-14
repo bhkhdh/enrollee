@@ -11,5 +11,7 @@ namespace Enrollee.Models
     public class ApplicationUser : IdentityUser
     {
         public string GivenName { get; set; }
+
+        public string SaveData { get; set; }
     }
 }

@@ -83,17 +83,145 @@
     <hr />
 
     <footer>
-        <environment exclude="Development">
-            <div class="share">
-                <g:plusone href="https://hneu-abit.appspot.com" size="standard"></g:plusone>
-                <div class="spacer"></div>
-                <div class="fb-share-button" data-href="https://hneu-abit.appspot.com" data-layout="button" data-size="large" data-mobile-iframe="false">
-                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhneu-abit.appspot.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
-                </div>
-                <div class="spacer"></div>
-                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-url="https://hneu-abit.appspot.com" data-show-count="false">Tweet</a>
-            </div>
-        </environment>
+        <style>
+
+            body {
+                -webkit-font-smoothing: antialiased;
+            }
+
+            .deck {
+                position: relative;
+                width: 10em;
+                height: 13em;
+                margin: 4em 0 0 -9em;
+                -webkit-backface-visibility: hidden;
+                font-family: "Ubuntu", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+                text-align: center;
+            }
+
+            .deck__item {
+                list-style-type: none;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                border-radius: 0.3em;
+                border: 0.1em solid rgba(0, 0, 0, 0.15);
+                box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.3), inset 0 6em 6em rgba(255, 255, 255, 0.1);
+                transform-origin: 90% 92%;
+                transition: 0.3s;
+            }
+
+                .deck__item:hover ~ .deck__item {
+                    transform: rotate(120deg);
+                }
+
+                .deck__item:last-of-type:after {
+                    content: "";
+                    position: absolute;
+                    left: 90%;
+                    top: 92%;
+                    border-radius: 50%;
+                    width: 1.2em;
+                    height: 1.2em;
+                    background: white;
+                    margin: -0.6em 0 0 -0.6em;
+                    box-shadow: inset 0 1px 1px white, inset 0 -0.3em 0.2em #dddcdb, 0 0 0.6em rgba(0, 0, 0, 0.2);
+                }
+
+                .deck__item:last-of-type:before {
+                    content: "";
+                    position: absolute;
+                    right: 0.4em;
+                    bottom: 0.9em;
+                    width: 1.1em;
+                    height: 0.15em;
+                    background: silver;
+                    background: rgba(0, 0, 0, 0.1);
+                    z-index: 2;
+                }
+
+            .deck__link {
+                text-decoration: none;
+                display: block;
+                color: white;
+                color: rgba(255, 255, 255, 0.8);
+            }
+
+            .deck__icon {
+                font-family: "FontAwesome", sans-serif;
+                font-size: 4em;
+                color: black;
+                color: rgba(0, 0, 0, 0.6);
+                display: block;
+                margin: 0.5em auto;
+            }
+
+            .deck__item--facebook {
+                background: #3b5998;
+                transform: rotate(-10deg);
+            }
+
+            .deck__item--github {
+                background: #4183c4;
+                transform: rotate(0deg);
+            }
+
+            .deck__item--twitter {
+                background: #00a0d1;
+                transform: rotate(10deg);
+            }
+
+            .deck__item--pinterest {
+                background: #910101;
+                transform: rotate(20deg);
+            }
+
+            .deck__item--googleplus {
+                background: #db4a39;
+                transform: rotate(30deg);
+            }
+        </style>
+
+        <ul class="deck">
+            <li class="deck__item deck__item--facebook">
+                <a class="deck__link" href="javascript:facebook()">
+                    <span class="deck__icon fontawesome-facebook"></span>
+                    <span class="deck__label">Facebook</span>
+                </a>
+            </li>
+            <li class="deck__item deck__item--github">
+                <a class="deck__link" href="https://github.com/bhkhdh/enrollee" target="_blank">
+                    <span class="deck__icon fontawesome-github"></span>
+                    <span class="deck__label">GitHub</span>
+                </a>
+            </li>
+            <li class="deck__item deck__item--twitter">
+                <a class="deck__link" href="https://twitter.com/intent/tweet?url=https://hneu-abit.appspot.com/&amp;text=Пройди%20этот%20квест,%20узнай%20что%20тебя%20ждёт%20при%20поступлении%20в%20универ!" target="_blank" />
+                <span class="deck__icon fontawesome-twitter"></span>
+                <span class="deck__label">Twitter</span>
+                </a>
+            </li>
+            <li class="deck__item deck__item--pinterest">
+                <a class="deck__link" href="https://www.pinterest.com/pin/create/button/?url=https://hneu-abit.appspot.com&description=Пройди%20этот%20квест,%20узнай%20что%20тебя%20ждёт%20при%20поступлении%20в%20универ!" target="_blank">
+                    <span class="deck__icon fontawesome-pinterest"></span>
+                    <span class="deck__label">Pinterest</span>
+                </a>
+            </li>
+            <li class="deck__item deck__item--googleplus">
+                <a class="deck__link" href="https://plus.google.com/share?url=https://hneu-abit.appspot.com" target="_blank">
+                    <span class="deck__icon fontawesome-google-plus"></span>
+                    <span class="deck__label">Google+</span>
+                </a>
+            </li>
+        </ul>
+        <script>
+            function facebook() {
+                window.open('https://www.facebook.com/sharer/sharer.php?u=https://hneu-abit.appspot.com',
+                    'facebook-share-dialog',
+                    'width=800,height=600'
+                );
+            }
+        </script>
 
         <div class="copyright">
             <p>&copy; 2018 - Enrollee</p>
