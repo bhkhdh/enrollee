@@ -34,6 +34,7 @@ var SC_PARK = "/images/game/scene/park.png";
 var SC_KHNUE1 = null; // ** NO IMAGE!
 var SC_KHNUE2 = null; // ** NO IMAGE!
 var SC_KHNUE3 = "/images/game/scene/khnue3.png";
+var SC_LECTURE = null; // ** NO IMAGE!
 
 var I_DOCUMENTS = "/images/game/misc/documents.png";
 
@@ -178,14 +179,14 @@ $game.dialog.setStage('act1-2', [
 ]);
 
 $game.dialog.setStage('act2-1', [
-    scene(SC_KHNUE1, "(Возле ХНЭУ)"),
+    scene(SC_KHNUE1, "(Приёмная комиссия ХНЭУ)"),
     action("show"),
-
-    image(C_YOU_2),
-    say("Ого, а тут правда прикольно!", CHR_YOU),
 
     image(null),
     say("[Заходят в здание Приемной комиссии]"),
+
+    image(C_YOU_2),
+    say("Ого, а тут правда прикольно!", CHR_YOU),
 
     image(C_FRIEND2_1),
     say("Ну и много же людей, мы тут на долго… *приуныл*", CHR_FRIEND2),
@@ -219,7 +220,7 @@ $game.dialog.setStage('act2-1', [
 ]);
 
 $game.dialog.setStage('act2-2', [
-    scene(SC_KHNUE1, "(Через некоторое время)"),
+    scene(SC_KHNUE1, "(Через некоторое время…)"),
     action("show"),
 
     image(C_WOMAN1_3),
@@ -293,7 +294,7 @@ $game.dialog.setStage('act3-1', [
     say("Вам осталось пройти тесты, вы с похожим уже сталкивались на ЗНО, только у нас вопросов меньше.", CHR_PROFESSOR),
 
     image(null),
-    scene(SC_KHNUE3, "(Через некоторое время)"),
+    scene(SC_KHNUE3, "(Через некоторое время…)"),
 
     image(C_PROFESSOR_1),
     say("Справились быстрее многих ребят, надеюсь не только быстро, но и правильно. *смеётся*", CHR_PROFESSOR),
@@ -328,10 +329,52 @@ $game.dialog.setStage('act3-1', [
 ]);
 
 $game.dialog.setStage('act3-2', [
+    scene(SC_LECTURE, "(Лабораторная по программированию)"),
+    action("show"),
+
+    image(C_PROFESSOR_1),
+    say("Сейчас, вам нужно будет зайти на сайт, на котором находится список задач – их нужно выполнить до следующего занятия. Там все то, что мы разбирали с вами на лекциях.", CHR_PROFESSOR),
+
+    image(C_FRIEND2_1),
+    say("Саш, а ты писал лекцию ? А то мне так не хотелось и я ничего не делал. *улыбается*", CHR_FRIEND2),
+
+    image(C_YOU_1),
+    say("Да, щас будем разбираться", CHR_YOU),
+
+    image(null),
+    scene(SC_LECTURE, "(Через некоторое время…)"),
+
+    image(C_FRIEND2_1),
+    say("Вау, у нас получилось, немного до 100 процентов не хватило.", CHR_FRIEND2),
+
+    image(C_YOU_3),
+    say("Да, мне очень понравилось, давай дальше решать."),
+
+    image(null),
+    say("[Подходит преподаватель]"),
+
+    image(C_PROFESSOR_1),
+    say("Молодцы ребята, не хотите поучаствовать в олимпиаде?", CHR_PROFESSOR),
+
+    image(C_YOU_3),
+    say("Да, конечно!", CHR_YOU),
+
+    image(C_FRIEND2_1),
+    say("Еще бы!", CHR_YOU),
+
+    image(null),
+    say("[Радостно ответили ребята, так и началось их знакомство с программированием]"),
+
     goto('ending'),
 ]);
 
 $game.dialog.setStage('ending', [
+    scene(null, "(Заключение)"),
+
+    image(null),
+    say("А ты готов начать свое знакомство с программированием именно в нашем Харьковском национальном экономическом университете имени Семена Кузнеца? Ждем тебя!"),
+
+    action("OverlayCertificate"),
     action("ChapterDone", ["act3", null]),
 ]);
 
