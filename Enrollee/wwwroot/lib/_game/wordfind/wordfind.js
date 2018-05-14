@@ -796,7 +796,7 @@
 
                     setTimeout(function () {
                         window.parent.postMessage('quest-ok', '*');
-                    }, 2000);
+                    }, 5000);
                 }
             }
 
@@ -864,7 +864,7 @@
 
             setTimeout(function () {
                 window.parent.postMessage('quest-ok', '*');
-            }, 2000);
+            }, 5000);
         };
     };
 

@@ -18,7 +18,7 @@ function checkGameStatus(){
 
         setTimeout(function () {
             window.parent.postMessage('quest-ok', '*');
-        }, 2000);
+        }, 5000);
     }
 }
 

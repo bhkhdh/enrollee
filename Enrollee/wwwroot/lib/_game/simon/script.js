@@ -178,7 +178,9 @@ var simon = {
               simon.flash(0);
           } else if (simon.isWon) {
               simon.isWon = false;
-              window.parent.postMessage('quest-ok', '*');
+              setTimeout(function () {
+                  window.parent.postMessage('quest-ok', '*');
+              }, 2000);
           }
       }
     }, 50));
