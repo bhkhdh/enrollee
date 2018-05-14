@@ -796,7 +796,7 @@
 
                     setTimeout(function () {
                         window.parent.postMessage('quest-ok', '*');
-                    }, 1000);
+                    }, 2000);
                 }
             }
 

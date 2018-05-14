@@ -1,4 +1,4 @@
-// not used yet
+﻿// not used yet
 var ISCONNECTED = {
     power : false,
     video : false,
@@ -12,8 +12,14 @@ var COUNTER = 6;
 var ERRORCOUNTER = 0;
 
 function checkGameStatus(){
-  if(COUNTER === 0)
-    $( "#successMessage" ).append('<h3>Errors:' + ERRORCOUNTER + '</h3>').show();
+    if (COUNTER === 0) {
+        $("#successMessage .errors").text(ERRORCOUNTER);
+        $("#successMessage").show();
+
+        setTimeout(function () {
+            window.parent.postMessage('quest-ok', '*');
+        }, 2000);
+    }
 }
 
 function reset(){

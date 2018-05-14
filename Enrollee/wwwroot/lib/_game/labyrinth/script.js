@@ -36,7 +36,7 @@ function win() {
     }
     setTimeout(function () {
         window.parent.postMessage('quest-ok', '*');
-    }, 1000);
+    }, 2000);
 }
 
 var clicked = [0, 0, 0];
