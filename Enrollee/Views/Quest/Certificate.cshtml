@@ -32,7 +32,7 @@
 
     <canvas id="canvashid" width="2560" height="1600" hidden></canvas>
 
-    <a id="download" download="Сертификат.png" />
+    <a id="download" download="сертификат.png" />
     <button>Сохранить себе</button>
     <img id="display" width="100%" height="90%" style="margin: 0 auto; display: block;object-fit: contain;" />
 
@@ -65,7 +65,7 @@
             img.setAttribute('crossOrigin', 'anonymous');
             img.onload = redraw;
             document.addEventListener("resize", redraw);
-            img.src = "/images/game/Certificate.RUS.png";
+            img.src = "/images/game/certificate-ru.png";
 
 
             function downloadImage() {
