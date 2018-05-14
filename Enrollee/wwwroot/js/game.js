@@ -173,7 +173,7 @@
                 dom.css('left', area.pos[0] + '%');
                 dom.css('top', area.pos[1] + '%');
                 dom.css('width', area.pos[2] + '%');
-                dom.css('height', area.pos[] + '%');
+                dom.css('height', area.pos[3] + '%');
                 
                 dom.click(this._showChapterMenu.bind(this, area));
             }
