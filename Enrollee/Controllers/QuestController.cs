@@ -18,5 +18,9 @@ namespace Enrollee.Controllers
         public IActionResult Game3() {
             return View();
         }
+
+        public IActionResult Game4() {
+            return View();
+        }
     }
 }

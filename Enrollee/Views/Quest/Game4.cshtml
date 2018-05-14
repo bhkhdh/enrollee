@@ -1,0 +1,99 @@
+﻿
+@{
+    Layout = "_EmptyLayout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/_game/computer/style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-md-6">
+            <div class="power"></div>
+            <div class="video"></div>
+            <div class="keyboard"></div>
+            <div class="usb1"></div>
+            <div class="usb2"></div>
+            <div class="usb3"></div>
+            <div class="audio"></div>
+            <div class="ethernet"></div>
+            <img src="~/lib/_game/computer/img/background.jpg">
+        </div>
+        <div class="col-md-6">
+
+            <table>
+                <tr>
+                    <td>
+                        <div id="power">
+
+                        </div>
+                    </td>
+                    <td>
+                        <img alt="Picture of power cable">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="video">
+
+                        </div>
+                    </td>
+                    <td>
+                        <img alt="Picture of video cable">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="keyboard"> </div>
+                    </td>
+                    <td>
+                        <img alt="Picture of keyboard">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="mouse"></div>
+                    </td>
+                    <td>
+                        <img alt="Picture of mouse">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="audio"></div>
+                    </td>
+                    <td>
+                        <img alt="Picture of jack">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="ethernet"></div>
+                    </td>
+                    <td>
+                        <img alt="Picture of ethernet cable">
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div id="successMessage" hidden>
+            <h2>У вас получилось!</h2>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="~/lib/_game/computer/script.js"></script>
+</body>
+
+</html>

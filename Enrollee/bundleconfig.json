@@ -55,5 +55,17 @@
     "inputFiles": [
       "wwwroot/lib/_game/simon/style.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/_game/computer/script.min.js",
+    "inputFiles": [
+      "wwwroot/lib/_game/computer/script.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/_game/computer/style.min.css",
+    "inputFiles": [
+      "wwwroot/lib/_game/computer/style.css"
+    ]
   }
 ]

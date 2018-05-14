@@ -27,7 +27,7 @@ $game.dialog.setStage('test-1', [
     { do: "image", url: "/images/game/dialog/person-1.png" },
     { do: "say", name: "Person", text: "Hello!" },
 
-    { do: "action", name: "StartQuest", args: ["/Quest/Game3"] },
+    { do: "action", name: "StartQuest", args: ["/Quest/Game4"] },
 
     { do: "say", name: "Person", text: "Here should be some content" },
 
